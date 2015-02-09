@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,18 @@ using System.Threading.Tasks;
 
 namespace TaskBoard.Repository.Models
 {
-    class TaskModel
+    public class TaskModel
     {
+        [BsonId]
+        public ObjectId _id { get; set; }
+        public string Title { get; set; }
+        public string Status { get; set; }
+        public string Description { get; set; }
+        public UserModel Source { get; set; }
+        public UserModel AsignedTo { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime DueDate { get; set; }
+        public List<CommentModel> Comments { get; set; }
     }
 }
