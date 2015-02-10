@@ -37,6 +37,7 @@
       <HintPath>..\packages\mongocsharpdriver.1.10.0\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,12 @@
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Respositories\Abstract\IProjectRepository.cs" />
+    <Compile Include="Respositories\Abstract\IRepository.cs" />
+    <Compile Include="Respositories\Abstract\IUserRepository.cs" />
+    <Compile Include="Respositories\Abstract\Repository.cs" />
+    <Compile Include="Respositories\ProjectRepository.cs" />
+    <Compile Include="Respositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
