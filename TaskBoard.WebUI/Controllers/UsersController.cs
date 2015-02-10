@@ -19,7 +19,29 @@ namespace TaskBoard.WebUI.Controllers
         }
 
         [Route("/users/{login}")]
-        public UserModel User(string login)
+        [HttpGet]
+        public UserModel Create(string login)
+        {
+            return _userRepository.GetByLogin(login);
+        }
+
+        [Route("/users/{login}")]
+        [HttpGet]
+        public UserModel Read(string login)
+        {
+            return _userRepository.GetByLogin(login);
+        }
+
+        [Route("/users/{login}")]
+        [HttpGet]
+        public UserModel Update(string login)
+        {
+            return _userRepository.GetByLogin(login);
+        }
+
+        [Route("/users/{login}")]
+        [HttpGet]
+        public UserModel Delete(string login)
         {
             return _userRepository.GetByLogin(login);
         }
