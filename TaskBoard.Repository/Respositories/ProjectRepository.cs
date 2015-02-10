@@ -28,7 +28,6 @@ namespace TaskBoard.Repository.Respositories
             Collection.Update(
                 Query.EQ("Tasks._id", task._id),
                 Update.SetWrapped<TaskModel>("Tasks.$", task));
-
         }
 
         public override void Remove(ProjectModel model)

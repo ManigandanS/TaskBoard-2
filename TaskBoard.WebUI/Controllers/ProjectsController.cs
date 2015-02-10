@@ -21,61 +21,51 @@ namespace TaskBoard.WebUI.Controllers
 
         [Route("/projects/{id}")]
         [HttpPost]
-        public HttpResponseMessage Create(ProjectModel project)
+        public string Create(ProjectModel project)
         {
-            HttpResponseMessage res = null;
-            try
-            {
-                _projectRepository.Save(project);
-                res = Request.CreateResponse<string>(project._id.ToString());
-            }
-            catch (Exception err) { res = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err.Message); }
-            return res;
+            _projectRepository.Save(project);
+            return project._id.ToString();
         }
 
         [Route("/projects/{id}")]
         [HttpGet]
-        public HttpResponseMessage Read(string id)
+        public ProjectModel Read(string id)
         {
-            ObjectId _id;
-            if (!ObjectId.TryParse(id, out _id))
-            {
-                return new HttpResponseMessage(HttpStatusCode.NotFound);
-            }
-            ProjectModel pm = _projectRepository.GetById(_id);
-            return Request.CreateResponse<ProjectModel>(
-                statusCode: (null != pm) ? HttpStatusCode.OK : HttpStatusCode.NotFound,
-                value: pm);
+            return _projectRepository.GetById(new ObjectId(id));
         }
 
         [Route("/projects/{id}")]
         [HttpPut]
-        public HttpResponseMessage Update(ProjectModel project)
+        public string Update(ProjectModel project)
         {
-            HttpResponseMessage res = null;
-            try
-            {
-                _projectRepository.Save(project);
-                res = Request.CreateResponse<string>(project._id.ToString());
-            }
-            catch (Exception err) { res = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err.Message); }
-            return res;
+           _projectRepository.Save(project);
+           return project._id.ToString();
         }
 
         [Route("/projects/{id}")]
         [HttpDelete]
-        public HttpResponseMessage Delete(string id)
+        public string Delete(string id)
         {
-            HttpResponseMessage res = null;
-            ObjectId _id;
-            if (!ObjectId.TryParse(id, out _id)) { res = Request.CreateErrorResponse(HttpStatusCode.NotFound, "Wrong id"); }
-            try
-            {
-                _projectRepository.Remove(new ProjectModel { _id = _id });
-                res = Request.CreateResponse<string>(id);
-            }
-            catch (Exception err) { res = Request.CreateErrorResponse(HttpStatusCode.InternalServerError, err.Message); }
-            return res;
+            _projectRepository.Remove(new ProjectModel { _id = ObjectId.Parse(id) });
+            return id;
+        }
+
+        [Route("/projects/{id}/task")]
+        [HttpPost]
+        public string CreateTask(string id, TaskModel task)
+        {
+            task._id = ObjectId.GenerateNewId();
+            _projectRepository.AddTask(task, id);
+            return task._id.ToString();
+        }
+
+        [Route("/projects/{id}/task")]
+        [HttpPost]
+        public string UpdateTask(string id, TaskModel task)
+        {
+            task._id = ObjectId.GenerateNewId();
+            _projectRepository.UpdateTask(task);
+            return task._id.ToString();
         }
     }
 }

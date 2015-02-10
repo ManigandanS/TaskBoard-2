@@ -47,7 +47,7 @@ namespace TaskBoard.WebUI
         {
             var connectionString = ConfigurationManager.ConnectionStrings["TaskBoard"].ConnectionString;
             container.RegisterType<IProjectRepository, ProjectRepository>(new InjectionConstructor(connectionString));
-            container.RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(connectionString));
+            container.RegisterType<IUserRepository, FakeUserRepository>(new InjectionConstructor(connectionString));
         }
     }
 }

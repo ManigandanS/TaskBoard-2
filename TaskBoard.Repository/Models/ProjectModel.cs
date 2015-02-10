@@ -17,5 +17,6 @@ namespace TaskBoard.Repository.Models
         public DateTime StartDate { get; set; }
         public List<TaskModel> Tasks { get; set; }
         public List<UserModel> Participants { get; set; }
+        public UserModel Owner { get; set; }
     }
 }

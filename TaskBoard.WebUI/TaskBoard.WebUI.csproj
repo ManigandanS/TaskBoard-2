@@ -960,6 +960,8 @@
     <Content Include="bower_components\jquery\src\var\support.js" />
     <Content Include="bower_components\jquery\src\var\toString.js" />
     <Content Include="bower_components\jquery\src\wrap.js" />
+    <Content Include="bower_components\knockout-sortable\build\knockout-sortable.js" />
+    <Content Include="bower_components\knockout-sortable\build\knockout-sortable.min.js" />
     <Content Include="bower_components\knockout\build\fragments\amd-post.js" />
     <Content Include="bower_components\knockout\build\fragments\amd-pre.js" />
     <Content Include="bower_components\knockout\build\fragments\extern-post.js" />
@@ -1025,6 +1027,8 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\ViewModels\TaskListViewModel.js" />
     <Content Include="Scripts\ViewModels\UserViewModel.js" />
+    <Content Include="Styles\cosmo.css" />
+    <Content Include="Styles\superhero.css" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1038,7 +1042,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Styles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1167,6 +1170,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\ViewModels\EditViewModel.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\knockout-sortable\.bower.json" />
+    <Content Include="bower_components\knockout-sortable\bower.json" />
+    <Content Include="bower_components\knockout-sortable\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
