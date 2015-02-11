@@ -962,6 +962,37 @@
     <Content Include="bower_components\jquery\src\wrap.js" />
     <Content Include="bower_components\knockout-sortable\build\knockout-sortable.js" />
     <Content Include="bower_components\knockout-sortable\build\knockout-sortable.min.js" />
+    <Content Include="bower_components\knockout-validation\dist\knockout.validation.js" />
+    <Content Include="bower_components\knockout-validation\dist\knockout.validation.min.js" />
+    <Content Include="bower_components\knockout-validation\localization\bg-BG.js" />
+    <Content Include="bower_components\knockout-validation\localization\ca-ES.js" />
+    <Content Include="bower_components\knockout-validation\localization\cs-CZ.js" />
+    <Content Include="bower_components\knockout-validation\localization\da-DK.js" />
+    <Content Include="bower_components\knockout-validation\localization\de-DE.js" />
+    <Content Include="bower_components\knockout-validation\localization\el-GR.js" />
+    <Content Include="bower_components\knockout-validation\localization\en-US.js" />
+    <Content Include="bower_components\knockout-validation\localization\es-ES.js" />
+    <Content Include="bower_components\knockout-validation\localization\fa-IR.js" />
+    <Content Include="bower_components\knockout-validation\localization\fr-FR.js" />
+    <Content Include="bower_components\knockout-validation\localization\he-IL.js" />
+    <Content Include="bower_components\knockout-validation\localization\hr-HR.js" />
+    <Content Include="bower_components\knockout-validation\localization\hu-HU.js" />
+    <Content Include="bower_components\knockout-validation\localization\it-IT.js" />
+    <Content Include="bower_components\knockout-validation\localization\ja-JP.js" />
+    <Content Include="bower_components\knockout-validation\localization\ko-KR.js" />
+    <Content Include="bower_components\knockout-validation\localization\lv-LV.js" />
+    <Content Include="bower_components\knockout-validation\localization\nb-NO.js" />
+    <Content Include="bower_components\knockout-validation\localization\nl-BE.js" />
+    <Content Include="bower_components\knockout-validation\localization\nl-NL.js" />
+    <Content Include="bower_components\knockout-validation\localization\pl-PL.js" />
+    <Content Include="bower_components\knockout-validation\localization\pt-BR.js" />
+    <Content Include="bower_components\knockout-validation\localization\pt-PT.js" />
+    <Content Include="bower_components\knockout-validation\localization\ro-RO.js" />
+    <Content Include="bower_components\knockout-validation\localization\ru-RU.js" />
+    <Content Include="bower_components\knockout-validation\localization\sv-SE.js" />
+    <Content Include="bower_components\knockout-validation\localization\tr-TR.js" />
+    <Content Include="bower_components\knockout-validation\localization\zh-CN.js" />
+    <Content Include="bower_components\knockout-validation\localization\zh-TW.js" />
     <Content Include="bower_components\knockout\build\fragments\amd-post.js" />
     <Content Include="bower_components\knockout\build\fragments\amd-pre.js" />
     <Content Include="bower_components\knockout\build\fragments\extern-post.js" />
@@ -1025,8 +1056,10 @@
     <Content Include="bower_components\knockout\src\virtualElements.js" />
     <Content Include="bower_components\requirejs\require.js" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\ko.js" />
+    <Content Include="Scripts\services\user.js" />
     <Content Include="Scripts\view-models\app.js" />
     <Content Include="Scripts\view-models\sign-in.js" />
     <Content Include="Scripts\view-models\sign-up.js" />
@@ -1185,6 +1218,20 @@
     <Content Include="bower_components\requirejs\.bower.json" />
     <Content Include="bower_components\requirejs\bower.json" />
     <Content Include="bower_components\requirejs\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\knockout-validation\.bower.json" />
+    <Content Include="bower_components\knockout-validation\bower.json" />
+    <Content Include="bower_components\knockout-validation\CONTRIBUTING.md" />
+    <Content Include="bower_components\knockout-validation\dist\knockout.validation.min.js.map" />
+    <Content Include="bower_components\knockout-validation\package.json" />
+    <Content Include="bower_components\knockout-validation\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Partial\SignIn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Partial\SignUp.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
