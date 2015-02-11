@@ -9,12 +9,12 @@
     <script src="~/bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="~/bower_components/knockout/dist/knockout.js"></script>
     <script src="~/bower_components/knockout-sortable/build/knockout-sortable.js"></script>
-    <script src="~/Scripts/ViewModels/UserViewModel.js"></script>
-    <script src="~/Scripts/ViewModels/TaskListViewModel.js"></script>
-    <script src="~/Scripts/ViewModels/EditViewModel.js"></script>
-    <script src="~/Scripts/app.js"></script>
+    <script data-main="@Url.Content("~/Scripts/main.js")" src="~/bower_components/requirejs/require.js"></script>
 </head>
 <body>
+    <!-- ko with : editTask -->
+        <div data-bind="text: message"></div>
+    <!-- /ko  -->
     <div id="wrap">
         <header>
             <nav class="navbar navbar-default navbar-inverse">

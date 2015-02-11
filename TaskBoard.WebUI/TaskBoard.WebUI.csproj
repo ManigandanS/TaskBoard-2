@@ -1023,10 +1023,15 @@
     <Content Include="bower_components\knockout\src\utils.js" />
     <Content Include="bower_components\knockout\src\version.js" />
     <Content Include="bower_components\knockout\src\virtualElements.js" />
+    <Content Include="bower_components\requirejs\require.js" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app.js" />
-    <Content Include="Scripts\ViewModels\TaskListViewModel.js" />
-    <Content Include="Scripts\ViewModels\UserViewModel.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\ko.js" />
+    <Content Include="Scripts\view-models\app.js" />
+    <Content Include="Scripts\view-models\sign-in.js" />
+    <Content Include="Scripts\view-models\sign-up.js" />
+    <Content Include="Scripts\view-models\task-list.js" />
+    <Content Include="Scripts\view-models\user.js" />
     <Content Include="Styles\cosmo.css" />
     <Content Include="Styles\superhero.css" />
     <Content Include="Unity.Mvc4.README.txt" />
@@ -1169,12 +1174,17 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\ViewModels\EditViewModel.js" />
+    <Content Include="Scripts\view-models\edit-task.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\knockout-sortable\.bower.json" />
     <Content Include="bower_components\knockout-sortable\bower.json" />
     <Content Include="bower_components\knockout-sortable\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\requirejs\.bower.json" />
+    <Content Include="bower_components\requirejs\bower.json" />
+    <Content Include="bower_components\requirejs\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
