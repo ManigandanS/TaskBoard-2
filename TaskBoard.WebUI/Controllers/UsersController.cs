@@ -18,11 +18,21 @@ namespace TaskBoard.WebUI.Controllers
             _userRepository = userRepository;
         }
 
-        [Route("/users/{login}")]
+        [Route("api/users/{login}")]
         [HttpGet]
         public UserModel Get(string login)
         {
             return _userRepository.GetByLogin(login);
+        }
+
+        [Route("api/users/exists/{login}")]
+        [HttpGet]
+        public HttpResponseMessage IsExists(string login)
+        {
+            UserModel user = _userRepository.GetByLogin(login);
+            return (null != user)
+                ? Request.CreateErrorResponse(HttpStatusCode.Conflict, login)
+                : Request.CreateResponse<string>(HttpStatusCode.OK, login);
         }
     }
 }

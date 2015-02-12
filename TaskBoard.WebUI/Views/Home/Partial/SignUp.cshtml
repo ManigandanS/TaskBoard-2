@@ -1,43 +1,46 @@
-﻿<div class="tab-pane fade" id="signup" data-bind="with: signUp">
-    <form class="form-horizontal">
+﻿<div class="tab-pane fade" id="signUp" 
+     data-bind="with: signUp">
+    <form class="form-horizontal" data-bind="with: user">
         <fieldset>
             <div class="control-group">
-                <div class="controls">
-                    <input class="form-control input-large" 
-                           type="email" 
-                           placeholder="Email@email.com" 
-                           required>
-                </div>
+                <input class="form-control input-large"
+                       type="text"
+                       placeholder="Username"
+                       data-bind="textInput: username"
+                       required>
             </div>
             <div class="control-group">
-                <label class="control-label" for="Email">E-mail:</label>
-                <div class="controls">
-                    <input id="Email" name="Email" class="form-control" type="text" placeholder="JoeSixpack@sixpacksrus.com" class="input-large" required="">
-                </div>
+                <input class="form-control input-large"
+                       type="text"
+                       placeholder="Email"
+                       data-bind="textInput: email"
+                       required>
             </div>
             <div class="control-group">
-                <label class="control-label" for="userid">Full Name:</label>
-                <div class="controls">
-                    <input id="userid" name="userid" class="form-control" type="text" placeholder="JoeSixpack" class="input-large" required="">
-                </div>
+                <input class="form-control input-large"
+                       type="text"
+                       placeholder="Full name"
+                       data-bind="textInput: fullName"
+                       required>
             </div>
             <div class="control-group">
-                <label class="control-label" for="password">Password:</label>
-                <div class="controls">
-                    <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required="">
-                    <em>1-8 Characters</em>
-                </div>
+                <input class="form-control input-large"
+                       type="password"
+                       placeholder="Pasword"
+                       data-bind="textInput: password"
+                       required>
             </div>
             <div class="control-group">
-                <label class="control-label" for="reenterpassword">Re-Enter Password:</label>
-                <div class="controls">
-                    <input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="********" class="input-large" required="">
-                </div>
+                <input class="form-control input-large"
+                       type="password"
+                       placeholder="Confirm password"
+                       data-bind="textInput: confirm"
+                       required>
             </div>
             <div class="control-group">
-                <label class="control-label" for="confirmsignup"></label>
                 <div class="controls">
-                    <button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
+                    <button class="btn btn-success"
+                            data-bind="click: $parent.signUp, enable: $parent.isValid">Sign Up</button>
                 </div>
             </div>
         </fieldset>

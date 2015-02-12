@@ -9,6 +9,7 @@ using TaskBoard.Repository.Respositories;
 
 namespace TaskBoard.WebUI.Controllers
 {
+    [RoutePrefix("api/auth")]
     public class AuthController : ApiController
     {
         private readonly IUserRepository _userRepository;
@@ -18,7 +19,7 @@ namespace TaskBoard.WebUI.Controllers
             _userRepository = userRepository;
         }
 
-        [Route("/auth/signup")]
+        [Route("signup")]
         [HttpPost]
         public string SignUp(UserModel user)
         {
@@ -26,20 +27,20 @@ namespace TaskBoard.WebUI.Controllers
             return user._id.ToString();
         }
 
-        [Route("auth/signin")]
+        [Route("signin")]
         [HttpPost]
-        public UserModel SignIn(string login, string password)
+        public UserModel SignIn(UserModel user)
         {
-            UserModel user = _userRepository.GetByLogin(login);
-            if(user.Password == password)
+            UserModel model = _userRepository.GetByLogin(user.Username);
+            if (model.Password == user.Password)
             {
-                user.Password = "";
-                return user;
+                model.Password = "";
+                return model;
             }
             return null;
         }
 
-        [Route("auth/signout")]
+        [Route("signout")]
         [HttpPost]
         public void SignOut()
         {

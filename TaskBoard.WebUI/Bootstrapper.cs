@@ -10,13 +10,13 @@ namespace TaskBoard.WebUI
 {
     public static class Bootstrapper
     {
-        public static IUnityContainer Initialise()
+        public static IUnityContainer Initialize()
         {
             var mvcContainer = BuildUnityMvcContainer();
-            var webApiContainer = BuildUnityMvcContainer();
+            var webApiContainer = BuildUnityWebApiContainer();
 
             DependencyResolver.SetResolver(new Unity.Mvc4.UnityDependencyResolver(mvcContainer));
-            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(mvcContainer);
+            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(webApiContainer);
 
             return mvcContainer;
         }
@@ -45,9 +45,9 @@ namespace TaskBoard.WebUI
 
         public static void RegisterWebApiTypes(IUnityContainer container)
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["TaskBoard"].ConnectionString;
+            var connectionString = "TaskBoard";// ConfigurationManager.ConnectionStrings["TaskBoard"].ConnectionString;
             container.RegisterType<IProjectRepository, ProjectRepository>(new InjectionConstructor(connectionString));
-            container.RegisterType<IUserRepository, FakeUserRepository>(new InjectionConstructor(connectionString));
+            container.RegisterType<IUserRepository, FakeUserRepository>();
         }
     }
 }

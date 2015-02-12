@@ -1056,11 +1056,11 @@
     <Content Include="bower_components\knockout\src\virtualElements.js" />
     <Content Include="bower_components\requirejs\require.js" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\main.js" />
-    <Content Include="Scripts\ko.js" />
+    <Content Include="Scripts\services\rules.js" />
     <Content Include="Scripts\services\user.js" />
     <Content Include="Scripts\view-models\app.js" />
+    <Content Include="Scripts\ko.js" />
     <Content Include="Scripts\view-models\sign-in.js" />
     <Content Include="Scripts\view-models\sign-up.js" />
     <Content Include="Scripts\view-models\task-list.js" />

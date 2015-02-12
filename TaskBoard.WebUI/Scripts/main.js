@@ -1,7 +1,12 @@
-﻿(function ($, require) {
-    $(function () {
-        require(['ko', 'view-models/app'], function (ko, App) {
+﻿(function (define, require) {
+    require.config({
+        paths: {
+            jquery: '../bower_components/jquery/dist/jquery',
+        }        
+    });
+    require(['ko', 'jquery', 'view-models/app'], function (ko, $, App) {
+        $(function () {
             ko.applyBindings(new App());
         });
     });
-})(jQuery, window.require);
+})(window.define, window.require);

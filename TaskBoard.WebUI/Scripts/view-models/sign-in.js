@@ -1,22 +1,24 @@
-﻿(function (define, require) {
+﻿(function (define) {
     define(['ko', 'services/user'], function (ko, userService) {
         return function () {
             var self = this;
             self.enabled = ko.observable(false);
             self.hasError = ko.observable(false);
-            self.user = ko.validatedObservable({
-                login: ko.observable(''),
-                password: ko.observable(''),
+            self.login = ko.observable(''),
+            self.password = ko.observable(''),
+            self.errors = ko.validation.group({ login: self.login, password: self.password });
+            self.enabled = ko.computed(function () {
+                return 0 === self.errors().length;
             });
-            self.click = function () {
+            self.signIn = function () {
                 userService.signIn({
-                    login: self.user().login(),
-                    password: self.user().password(),
-                })
-                .error(function () {
+                    Username: self.login(),
+                    Password: self.password(),
+                },
+                function () {
                     self.hasError(true);
-                });
+                })
             };
         }
     });
-})(window.define, window.require);
+})(window.define);

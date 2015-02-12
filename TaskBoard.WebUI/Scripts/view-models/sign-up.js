@@ -1,31 +1,13 @@
 ﻿(function (define, require) {
-    define(['ko', 'services/user'], function (ko, userService) {
+    define(['ko', 'services/user', 'services/rules'], function (ko, userService) {
         return function () {
-            var userTimeoutId = 0;
-            var emailTimeoutId = 0;
             var self = this;
-            self.username = ko.observable('');
-            self.email = ko.observable('');
-            self.password = ko.observable('');
-            self.confirm = ko.observable('');
-            self.usernameUsed = ko.observable(false);
-            self.emailUsed = ko.observable(false);
-            self.usernameChange = function () {                                     // debounce: 500
-                clearTimeout(userTimeoutId);
-                userTimeoutId = setTimeout(function () {
-                    userService.checkUsername(self.username(), function (used) {
-                        self.usernameUsed(used);
-                    });
-                }, 500);
-            };
-            self.emailChange = function () {
-                clearTimeout(emailTimeoutId);                                       // debounce: 500
-                emailTimeoutId = setTimeout(function () {
-                    userService.checkEmail(self.email(), function (used) {
-                        self.emailUsed(used);
-                    });
-                }, 500);
-            };
+            self.user = ko.validatedObservable({
+                username: ko.observable('').extend({ uniqueUsername: { throttle: 500 } }),
+                email: ko.observable('').extend({ uniqueEmail: { throttle: 500 } }),
+                password: ko.observable(''),
+                confirm: ko.observable('').extend({ equals: { param: this.password } })
+            });
         }
     });
 })(window.define, window.require);

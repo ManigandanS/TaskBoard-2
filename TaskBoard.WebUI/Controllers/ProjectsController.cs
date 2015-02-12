@@ -19,7 +19,7 @@ namespace TaskBoard.WebUI.Controllers
             _projectRepository = projectRepository;
         }
 
-        [Route("/projects/{id}")]
+        [Route("api/projects/{id}")]
         [HttpPost]
         public string Create(ProjectModel project)
         {
@@ -27,14 +27,14 @@ namespace TaskBoard.WebUI.Controllers
             return project._id.ToString();
         }
 
-        [Route("/projects/{id}")]
+        [Route("api/projects/{id}")]
         [HttpGet]
         public ProjectModel Read(string id)
         {
             return _projectRepository.GetById(new ObjectId(id));
         }
 
-        [Route("/projects/{id}")]
+        [Route("api/projects/{id}")]
         [HttpPut]
         public string Update(ProjectModel project)
         {
@@ -42,7 +42,7 @@ namespace TaskBoard.WebUI.Controllers
            return project._id.ToString();
         }
 
-        [Route("/projects/{id}")]
+        [Route("api/projects/{id}")]
         [HttpDelete]
         public string Delete(string id)
         {
@@ -50,7 +50,7 @@ namespace TaskBoard.WebUI.Controllers
             return id;
         }
 
-        [Route("/projects/{id}/task")]
+        [Route("api/projects/{id}/task")]
         [HttpPost]
         public string CreateTask(string id, TaskModel task)
         {
@@ -59,7 +59,7 @@ namespace TaskBoard.WebUI.Controllers
             return task._id.ToString();
         }
 
-        [Route("/projects/{id}/task")]
+        [Route("api/projects/{id}/task")]
         [HttpPost]
         public string UpdateTask(string id, TaskModel task)
         {
