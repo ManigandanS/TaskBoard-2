@@ -20,8 +20,8 @@
                 <div class="form-group">
                     <input class="form-control input-large"
                            type="text"
-                           placeholder="Full name"
-                           data-bind="textInput: fullName"
+                           placeholder="Full Name"
+                           data-bind="textInput: fullname"
                            required>
                 </div>
                 <div class="form-group">
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <div class="controls">
                         <button class="btn btn-success"
-                                data-bind="click: $parent.signUp, enable: $parent.isValid">
+                                data-bind="click: signUp">
                             Sign Up
                         </button>
                     </div>

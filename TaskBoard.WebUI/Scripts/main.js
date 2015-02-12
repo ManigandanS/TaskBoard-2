@@ -1,16 +1,20 @@
-﻿(function (define, require) {
+﻿(function (define, require, $) {
     require.config({
         paths: {
             jquery: '../bower_components/jquery/dist/jquery',
         }
     });
-    require(['ko', 'jquery', 'view-models/app'], function (ko, $, App) {
+    require(['ko', 'view-models/app'], function (ko, App) {
         $(function () {
             //bootstrap app
-            $('.datepicker').datepicker({ format: "yyyy-mm-dd" });
+            var dp = $('.datepicker').datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                todayHighlight: true
+            });
 
             // start app
             ko.applyBindings(new App());
         });
     });
-})(window.define, window.require);
+})(window.define, window.require, window.jQuery);

@@ -3,12 +3,8 @@
         return function () {
             var self = this;
             self.hasError = ko.observable(false);
-            self.login = ko.observable(''),
-            self.password = ko.observable(''),
-            self.errors = ko.validation.group({ login: self.login, password: self.password });
-            self.disabled = ko.computed(function () {
-                return 0 !== self.errors().length;
-            });
+            self.login = ko.observable('');
+            self.password = ko.observable('');
             self.signIn = function () {
                 userService.signIn({
                     Username: self.login(),
