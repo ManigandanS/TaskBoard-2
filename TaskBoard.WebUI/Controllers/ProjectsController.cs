@@ -10,6 +10,7 @@ using TaskBoard.Repository.Respositories;
 
 namespace TaskBoard.WebUI.Controllers
 {
+    [RoutePrefix("api/projects")]
     public class ProjectsController : ApiController
     {
         private readonly IProjectRepository _projectRepository;
@@ -19,7 +20,6 @@ namespace TaskBoard.WebUI.Controllers
             _projectRepository = projectRepository;
         }
 
-        [Route("api/projects/{id}")]
         [HttpPost]
         public string Create(ProjectModel project)
         {
@@ -27,14 +27,13 @@ namespace TaskBoard.WebUI.Controllers
             return project._id.ToString();
         }
 
-        [Route("api/projects/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public ProjectModel Read(string id)
         {
             return _projectRepository.GetById(new ObjectId(id));
         }
 
-        [Route("api/projects/{id}")]
         [HttpPut]
         public string Update(ProjectModel project)
         {

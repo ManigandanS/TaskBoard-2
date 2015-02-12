@@ -34,5 +34,12 @@ namespace TaskBoard.Repository.Respositories
         {
             Collection.Remove(Query<ProjectModel>.EQ(t => t._id, model._id), RemoveFlags.None);
         }
+
+        public void RemoveTask(TaskModel task)
+        {
+            Collection.Update(
+                Query.EQ("Tasks._id", task._id),
+                Update.PullWrapped<TaskModel>("Tasks.$", task));
+        }
     }
 }

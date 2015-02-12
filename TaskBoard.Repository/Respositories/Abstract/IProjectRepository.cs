@@ -12,5 +12,6 @@ namespace TaskBoard.Repository.Respositories
     {
         void AddTask(TaskModel task, string projectId);
         void UpdateTask(TaskModel task);
+        void RemoveTask(TaskModel model);
     }
 }

@@ -142,6 +142,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1058,6 +1059,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\services\rules.js" />
+    <Content Include="Scripts\services\project.js" />
     <Content Include="Scripts\services\user.js" />
     <Content Include="Scripts\view-models\app.js" />
     <Content Include="Scripts\ko.js" />
@@ -1228,10 +1230,19 @@
     <Content Include="bower_components\knockout-validation\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Partial\SignIn.cshtml" />
+    <Content Include="Views\Home\Tabs\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Partial\SignUp.cshtml" />
+    <Content Include="Views\Home\Tabs\SignUp.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Modal\Auth.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Panels\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Panels\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

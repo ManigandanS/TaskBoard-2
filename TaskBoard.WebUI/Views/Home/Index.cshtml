@@ -27,7 +27,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html">SB Admin</a>
+                        <a class="navbar-brand" href="index.html">Taskboard</a>
                     </div>
                     <ul class="nav nav-pills pull-right">
                         <li>
@@ -40,123 +40,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="main col-lg-8">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="panel panel-danger">
-                                <div class="panel-heading text-center">
-                                    <h5 class="panel-title">Open</h5>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="well">
-                                        Task1
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="panel panel-warning">
-                                <div class="panel-heading text-center">
-                                    <h5 class="panel-title">InProgress</h5>
-                                </div>
-                                <div class="panel-body">
-                                    <blockquote>
-                                        Task1
-                                    </blockquote>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            <div class="panel panel-success">
-                                <div class="panel-heading text-center">
-                                    <h5 class="panel-title">Done</h5>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="well">
-                                        Task1
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @Html.Partial("Panels/List")
                 </div>
                 <div class="sidebar col-lg-4">
-                    <div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading text-center">
-                                <h5 class="panel-title">Details</h5>
-                            </div>
-                            <div class="panel-body">
-                                <form class="well">
-                                    <fieldset>
-                                        <legend>Edit task</legend>
-                                        <div class="form-group">
-                                            <label class="control-label">Title:</label>
-                                            <input class="form-control" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Description:</label>
-                                            <textarea class="form-control"></textarea>
-                                        </div>
-                                        <input type="button" class="btn btn-primary btn-sm" value="Save">
-                                    </fieldset>
-                                </form>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading text-center">
-                                        <h5 class="panel-title">Coments</h5>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="well">
-                                            <form>                                                
-                                                <fieldset>
-                                                    <legend>Add comment:</legend>
-                                                    <div class="form-group">
-                                                        <textarea class="form-control"></textarea>
-                                                    </div>
-                                                    <button class="btn btn-primary btn-sm">Add</button>
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                        <div class="well">Comment</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @Html.Partial("Panels/Edit")
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade bs-modal-sm" 
-         id="myModal" 
-         tabindex="-1" 
-         role="dialog" 
-         aria-labelledby="mySmallModalLabel" 
-         aria-hidden="true"
-         data-bind="with: user">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <br>
-                <div class="bs-example bs-example-tabs">
-                    <ul id="myTab" class="nav nav-tabs">
-                        <li class="active"><a href="#signIn" data-toggle="tab">Sign In</a></li>
-                        <li class=""><a href="#signUp" data-toggle="tab">Register</a></li>
-                    </ul>
-                </div>
-                <div class="modal-body">
-                    <div id="myTabContent" class="tab-content">        
-                        @Html.Partial("Partial/SignIn")
-                        @*@Html.Partial("Partial/SignUp")*@
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <center>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </center>
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("Modal/Auth")
 </body>
 
 </html>

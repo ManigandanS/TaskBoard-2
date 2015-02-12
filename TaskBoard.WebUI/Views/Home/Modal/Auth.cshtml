@@ -1,0 +1,30 @@
+﻿<div class="modal fade bs-modal-sm"
+     id="myModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="mySmallModalLabel"
+     aria-hidden="true"
+     data-bind="with: user">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <br>
+            <div class="bs-example bs-example-tabs">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active"><a href="#signIn" data-toggle="tab">Sign In</a></li>
+                    <li class=""><a href="#signUp" data-toggle="tab">Register</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div id="myTabContent" class="tab-content">
+                    @Html.Partial("Tabs/SignIn")
+                    @Html.Partial("Tabs/SignUp")
+                </div>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
