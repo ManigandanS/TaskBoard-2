@@ -48,23 +48,5 @@ namespace TaskBoard.WebUI.Controllers
             _projectRepository.Remove(new ProjectModel { _id = ObjectId.Parse(id) });
             return id;
         }
-
-        [Route("api/projects/{id}/task")]
-        [HttpPost]
-        public string CreateTask(string id, TaskModel task)
-        {
-            task._id = ObjectId.GenerateNewId();
-            _projectRepository.AddTask(task, id);
-            return task._id.ToString();
-        }
-
-        [Route("api/projects/{id}/task")]
-        [HttpPost]
-        public string UpdateTask(string id, TaskModel task)
-        {
-            task._id = ObjectId.GenerateNewId();
-            _projectRepository.UpdateTask(task);
-            return task._id.ToString();
-        }
     }
 }

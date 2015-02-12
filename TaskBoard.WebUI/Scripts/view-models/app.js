@@ -3,8 +3,8 @@
         function (ko, TaskList, EditTask, User) {
         return function () {
             var self = this;
-            self.taskList = new TaskList();
-            self.editTask = new EditTask();
+            self.list = new TaskList();
+            self.edit = new EditTask();
             self.user = new User();
         }
     });

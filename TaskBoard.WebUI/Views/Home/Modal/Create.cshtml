@@ -1,0 +1,72 @@
+﻿<div class="modal fade bs-modal-create"
+     id="myModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="mySmallModalLabel"
+     aria-hidden="true"
+     data-bind="with: user">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <legend>New Task</legend>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label class="col-lg-2 control-label">Title:</label>
+                                    <input type="text"
+                                           class="form-control input-medium"
+                                           placeholder="Title"
+                                           data-bind="textInput: login"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label class="col-lg-2 control-label">Title:</label>
+                                    <textarea class="form-control"
+                                              placeholder="Description..."
+                                              data-bind="textInput: desc"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label class="col-lg-2 control-label">Start Date:</label>
+                                    <input type="text"
+                                           class="form-control input-medium"
+                                           placeholder="Title"
+                                           data-bind="textInput: login"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label class="col-lg-2 control-label">Due Date:</label>
+                                    <input type="text"
+                                           class="form-control input-medium"
+                                           placeholder="Title"
+                                           data-bind="textInput: login"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+                                    <button class="btn btn-success"
+                                            data-bind="disable: disabled, click: signIn">
+                                        Create
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>

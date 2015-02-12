@@ -1,33 +1,35 @@
 ﻿<div class="tab-pane fade active in" id="signIn"
      data-bind="with: signIn">
-    <form class="form-horizontal">
-        <fieldset>
-            <div class="control-group">
-                <div class="controls">
-                    <input type="text"
-                           class="form-control input-medium"
-                           placeholder="Login or E-mail"
-                           data-bind="textInput: login"
-                           required>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="text"
+                               class="form-control input-medium"
+                               placeholder="Login or E-mail"
+                               data-bind="textInput: login"
+                               required>
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <input type="password"
-                           class="form-control input-medium"
-                           placeholder="Password"
-                           data-bind="textInput: password"
-                           required>
+                <div class="form-group">
+                    <div class="controls">
+                        <input type="password"
+                               class="form-control input-medium"
+                               placeholder="Password"
+                               data-bind="textInput: password"
+                               required>
+                    </div>
                 </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button class="btn btn-success"
-                            data-bind="enable: enabled, click: signIn">
-                        Sign In
-                    </button>
+                <div class="form-group">
+                    <div class="controls">
+                        <button class="btn btn-success"
+                                data-bind="disable: disabled, click: signIn">
+                            Sign In
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
+    </div>
 </div>

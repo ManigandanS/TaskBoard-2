@@ -2,23 +2,21 @@
 <html>
 <head>
     <title>Taskboard</title>
-    @*<link href="~/Styles/superhero.css" rel="stylesheet" />*@    
-    <link href="~/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Styles/paper.css" rel="stylesheet" />    
+    @*<link href="~/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />*@
     <script src="~/bower_components/jquery/dist/jquery.js"></script>
     <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="~/bower_components/knockout/dist/knockout.js"></script>
+    <script src="~/Scripts/lib/ko.dateBindings.js"></script>
     <script src="~/bower_components/knockout-sortable/build/knockout-sortable.js"></script>
     <script src="~/bower_components/knockout-validation/dist/knockout.validation.js"></script>
     <script data-main="@Url.Content("~/Scripts/main.js")" src="~/bower_components/requirejs/require.js"></script>
 </head>
 <body>
-    <!-- ko with: editTask -->
-        <div data-bind="text: message"></div>
-    <!-- /ko  -->
     <div id="wrap">
         <header>
-            <nav class="navbar navbar-default navbar-inverse">
+            <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -49,6 +47,7 @@
         </div>
     </div>
     @Html.Partial("Modal/Auth")
+    @Html.Partial("Modal/Create")
 </body>
 
 </html>
