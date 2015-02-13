@@ -7,41 +7,36 @@
                     <input class="form-control input-large"
                            type="text"
                            placeholder="Username"
-                           data-bind="textInput: username"
-                           required>
+                           data-bind="textInput: username">
                 </div>
                 <div class="form-group">
                     <input class="form-control input-large"
                            type="text"
                            placeholder="Email"
-                           data-bind="textInput: email"
-                           required>
+                           data-bind="textInput: email">
                 </div>
                 <div class="form-group">
                     <input class="form-control input-large"
                            type="text"
                            placeholder="Full Name"
-                           data-bind="textInput: fullname"
-                           required>
+                           data-bind="textInput: fullname">
                 </div>
                 <div class="form-group">
                     <input class="form-control input-large"
                            type="password"
                            placeholder="Pasword"
-                           data-bind="textInput: password"
-                           required>
+                           data-bind="textInput: password">
                 </div>
                 <div class="form-group">
                     <input class="form-control input-large"
                            type="password"
                            placeholder="Confirm password"
-                           data-bind="textInput: confirm"
-                           required>
+                           data-bind="textInput: confirm">
                 </div>
                 <div class="form-group">
                     <div class="controls">
                         <button type="button" class="btn btn-success"
-                                data-bind="click: signUp">
+                                data-bind="click: signUp, enable: enabled">
                             Sign Up
                         </button>
                     </div>

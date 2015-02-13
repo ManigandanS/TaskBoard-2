@@ -5,34 +5,45 @@
             self.app = app;
             self.username = ko.observable('').extend({
                 required: true,
+                throttle: 750,
                 pattern: {
-                    message: 'Only letters and numbers',
-                    params: '^[A-Za-z0-9].$'
+                    message: 'Only letters and numbers.',
+                    params: /^[A-Za-z0-9_-]$/
                 },
-                uniqueUsername: {
-                    throttle: 500,
-                    message: 'Username already used',
+                uniqueUsername: {                    
+                    message: 'Username already used.',
                 }
             });
             self.email = ko.observable('').extend({
+                throttle: 750,
                 required: true,
-                uniqueEmail: {
-                    throttle: 500,
-                    message: 'E-mail already used',
+                email: true,
+                uniqueEmail: {                    
+                    message: 'E-mail already used.',
                 }
             });
-            self.password = ko.observable('');
-            self.fullname = ko.observable('');
-            self.confirm = ko.observable('').extend({ equals: { params: this.password } });
+            self.password = ko.observable('').extend({ required: true, });
+            self.fullname = ko.observable('').extend({
+                required: true,
+                pattern: {
+                    params: /^[A-Za-z]$/,
+                    message: 'Only letters and whitespace.',
+                }
+            })
+            self.confirm = ko.observable('').extend({
+                equals: {
+                    params: this.password,
+                    message: 'Password does not match confirmation.'
+                }
+            });
             self.errors = ko.validation.group({
                 login: self.username,
                 email: self.email,
                 password: self.password,
                 confirm: self.confirm
             });
-            self.disabled = ko.computed(function () {
-                var errs = self.errors();
-                return 0 !== errs.length;
+            self.enabled = ko.computed(function () {
+                return 0 === self.errors().length;
             });
             self.signUp = function () {
                 if (0 !== self.errors().length) { return; }

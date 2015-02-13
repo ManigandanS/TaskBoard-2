@@ -1,10 +1,10 @@
 ﻿<div class="modal fade bs-modal-create"
-     id="myModal"
+     id="createModal"
      tabindex="-1"
      role="dialog"
      aria-labelledby="mySmallModalLabel"
      aria-hidden="true"
-     data-bind="with: user">
+     data-bind="with: create">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
@@ -18,8 +18,7 @@
                                     <input type="text"
                                            class="form-control input-medium"
                                            placeholder="Title"
-                                           data-bind="textInput: login"
-                                           required>
+                                           data-bind="textInput: title">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -34,10 +33,9 @@
                                 <div class="controls">
                                     <label class="control-label">Start Date:</label>
                                     <input type="text"
-                                           class="form-control input-medium"
+                                           class="form-control input-medium datepicker"
                                            placeholder="Title"
-                                           data-bind="textInput: login"
-                                           required>
+                                           data-bind="textInput: startDate">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -46,14 +44,13 @@
                                     <input type="text"
                                            class="form-control input-medium datepicker"
                                            placeholder="Title"
-                                           data-bind="textInput: login"
-                                           required>
+                                           data-bind="textInput: dueDate">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="controls">
                                     <button class="btn btn-success"
-                                            data-bind="disable: disabled, click: signIn">
+                                            data-bind="enable: enabled, click: create">
                                         Create
                                     </button>
                                 </div>

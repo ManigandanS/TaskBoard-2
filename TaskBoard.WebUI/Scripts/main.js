@@ -13,6 +13,9 @@
                 todayHighlight: true
             });
             $('.autosize').autosize();
+            ko.validation.init({
+                errorMessageClass: 'label label-danger'
+            })
 
             // start app
             ko.applyBindings(new App());

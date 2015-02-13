@@ -36,8 +36,9 @@
             };
             self.checkLogin = function (login, callback) {
                 $.ajax({
-                    url: 'api/users/exists/' + login,
+                    url: 'api/users/exists',
                     type: 'GET',
+                    data: { login: login },
                     success: function () {
                         callback(true);
                     },
