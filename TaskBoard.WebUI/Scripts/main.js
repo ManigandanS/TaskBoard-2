@@ -7,11 +7,12 @@
     require(['ko', 'view-models/app'], function (ko, App) {
         $(function () {
             //bootstrap app
-            var dp = $('.datepicker').datepicker({
+            $('.datepicker').datepicker({
                 format: "yyyy-mm-dd",
                 autoclose: true,
                 todayHighlight: true
             });
+            $('.autosize').autosize();
 
             // start app
             ko.applyBindings(new App());

@@ -1198,6 +1198,7 @@
     <Content Include="Scripts\view-models\user.js" />
     <Content Include="Styles\cosmo.css" />
     <Content Include="Styles\paper.css" />
+    <Content Include="Styles\styles.css" />
     <Content Include="Styles\superhero.css" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />

@@ -3,23 +3,7 @@
         <div class="panel-heading text-center">
             <h5 class="panel-title">Details</h5>
         </div>
-        <div class="panel-body">
-            <form class="well">
-                <fieldset>
-                    <legend>Edit task</legend>
-                    <div class="form-group">
-                        <label class="control-label">Title:</label>
-                        <input class="form-control"
-                               data-bind="textInput: title" />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Description:</label>
-                        <textarea class="form-control"
-                                  data-bind="textInput: desc"></textarea>
-                    </div>
-                    <input type="button" class="btn btn-primary btn-sm" value="Save">
-                </fieldset>
-            </form>
+        <div class="panel-body">            
             <div class="panel panel-default">
                 <div class="panel-heading text-center">
                     <h5 class="panel-title">Coments</h5>
@@ -30,11 +14,9 @@
                             <fieldset>
                                 <legend>Add comment:</legend>
                                 <div class="form-group">
-                                    <textarea class="form-control"
-                                              data-bind="textInput: comment"></textarea>
+                                    <textarea class="form-control"></textarea>
                                 </div>
-                                <button class="btn btn-primary btn-sm"
-                                        data-bind="click: addComment, disable: emptyComment">
+                                <button class="btn btn-primary btn-sm">
                                     Add
                                 </button>
                             </fieldset>

@@ -1,7 +1,8 @@
 ﻿(function (define, require) {
     define(['ko', 'services/user', 'services/rules'], function (ko, userService) {
-        return function () {
+        return function (app) {
             var self = this;
+            self.app = app;
             self.username = ko.observable('').extend({
                 required: true,
                 pattern: {

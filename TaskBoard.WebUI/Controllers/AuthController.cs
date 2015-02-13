@@ -23,7 +23,7 @@ namespace TaskBoard.WebUI.Controllers
         [HttpPost]
         public string SignUp(UserModel user)
         {
-            //_userRepository.Save(user);
+            _userRepository.Save(user);
             return user._id.ToString();
         }
 
