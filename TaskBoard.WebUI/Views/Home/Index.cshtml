@@ -7,8 +7,8 @@
     <link href="~/bower_components/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
     <link href="~/bower_components/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
     <script src="~/bower_components/jquery/dist/jquery.js"></script>
-    <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>    
     <script src="~/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>   
     <script src="~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="~/bower_components/jquery-autosize/jquery.autosize.js"></script>
     <script src="~/bower_components/knockout/dist/knockout.js"></script>
@@ -31,11 +31,7 @@
                         </button>
                         <a class="navbar-brand" href="index.html">Taskboard</a>
                     </div>
-                    <ul class="nav nav-pills pull-right">
-                        <li>
-                            <button class="btn btn-primary" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Sign Up</button>
-                        </li>
-                    </ul>
+                    @Html.Partial("Bars/User")
                 </div>
             </nav>
         </header>
@@ -45,7 +41,7 @@
                     @Html.Partial("Panels/List")
                 </div>
                 <div class="sidebar col-lg-4">
-                    @Html.Partial("Panels/Edit")
+                    @Html.Partial("Panels/Details")
                 </div>
             </div>
         </div>

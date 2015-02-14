@@ -45,8 +45,8 @@ namespace TaskBoard.WebUI
 
         public static void RegisterWebApiTypes(IUnityContainer container)
         {
-            var connectionString = "TaskBoard";// ConfigurationManager.ConnectionStrings["TaskBoard"].ConnectionString;
-            container.RegisterType<IProjectRepository, ProjectRepository>(new InjectionConstructor(connectionString));
+            var connectionString = ConfigurationManager.ConnectionStrings["Taskboard"].ConnectionString;
+            container.RegisterType<IProjectRepository, FakeProjectRepository>();
             container.RegisterType<IUserRepository, FakeUserRepository>();
         }
     }

@@ -41,5 +41,11 @@ namespace TaskBoard.Repository.Respositories
                 Query.EQ("Tasks._id", task._id),
                 Update.PullWrapped<TaskModel>("Tasks.$", task));
         }
+
+
+        public List<ProjectModel> GetByOwner(string username)
+        {
+            return Get(Query<ProjectModel>.EQ(p => p.Owner.Username, username),0 , int.MaxValue);
+        }
     }
 }

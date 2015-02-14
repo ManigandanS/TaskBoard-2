@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,17 +15,42 @@ namespace TaskBoard.WebUI.Controllers
     {
         private readonly IUserRepository _userRepository;
 
-        public AuthController(IUserRepository userRepository)
+        // temporaty
+        private readonly IProjectRepository _projectRepository;
+
+        public AuthController(IUserRepository userRepository, IProjectRepository projectRepository)
         {
             _userRepository = userRepository;
+            _projectRepository = projectRepository;
         }
 
         [Route("signup")]
         [HttpPost]
-        public string SignUp(UserModel user)
+        public UserModel SignUp(UserModel user)
         {
+            var project = new ProjectModel
+            {
+                Owner = new UserModel
+                {
+                    Username = user.Username,
+                    FullName = user.FullName
+                },
+                Participants = new List<UserModel>
+                {
+                    new UserModel
+                    {
+                        Username = user.Username,
+                        FullName = user.FullName
+                    }
+                },
+                Title = "Project",
+                Description = "Description",
+                _id = ObjectId.GenerateNewId()
+            };
             _userRepository.Save(user);
-            return user._id.ToString();
+            _projectRepository.Save(project);
+            user.Password = "";
+            return user;
         }
 
         [Route("signin")]

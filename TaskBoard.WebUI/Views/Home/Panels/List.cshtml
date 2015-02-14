@@ -1,4 +1,4 @@
-﻿<div class="row">
+﻿<div class="row" data-bind="with: list">
     <div class="col-lg-4 col-md-4 col-sm-4">
         <div class="panel panel-danger">
             <div class="panel-heading text-center">
@@ -11,9 +11,11 @@
                         data-target=".bs-modal-create">
                     Add
                 </button>
-                <div class="well">
-                    Task1
-                </div>
+                <div data-bind="sortable: { data: open }">
+                    <div>
+                        <span class="h5" data-bind="text: Title"></span>
+                    </div>
+                </div>                
             </div>
         </div>
     </div>
@@ -23,9 +25,11 @@
                 <h5 class="panel-title">InProgress</h5>
             </div>
             <div class="panel-body">
-                <blockquote>
-                    Task1
-                </blockquote>
+                <div data-bind="sortable: { data: prog }">
+                    <div>
+                        <span class="h5" data-bind="text: Title"></span>
+                    </div>
+                </div>     
             </div>
         </div>
     </div>
@@ -35,9 +39,11 @@
                 <h5 class="panel-title">Done</h5>
             </div>
             <div class="panel-body">
-                <div class="well">
-                    Task1
-                </div>
+                <div data-bind="sortable: { data: done }">
+                    <div>
+                        <span class="h5" data-bind="text: Title"></span>
+                    </div>
+                </div>     
             </div>
         </div>
     </div>

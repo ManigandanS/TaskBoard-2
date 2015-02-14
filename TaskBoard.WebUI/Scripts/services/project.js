@@ -11,10 +11,24 @@
                     dataType: 'json',
                     success: function (res) {
                         self.projects = res;
-                        callback(null, res);
+                        if ('function' == typeof callback) { callback(null, res) };
                     },
                     error: function (res) {
-                        callback(res);
+                        if ('function' == typeof callback) { callback(res); }
+                    }
+                });
+            };
+            self.getUsersProjects = function (callback) {
+                $.ajax({
+                    url: 'api/projects/user/' + userService.user.Username,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (res) {
+                        self.projects = res;
+                        if ('function' == typeof callback) { callback(null, res) };
+                    },
+                    error: function (res) {
+                        if ('function' == typeof callback) { callback(res); }
                     }
                 });
             };
@@ -26,10 +40,10 @@
                     data: task,
                     success: function (res) {
                         self.projects = res;
-                        callback(null, res);
+                        if ('function' == typeof callback) { callback(null, res) };
                     },
                     error: function (res) {
-                        callback(res);
+                        if ('function' == typeof callback) { callback(res); }
                     }
                 });
             };
@@ -41,10 +55,10 @@
                     data: task,
                     success: function (res) {
                         self.projects = res;
-                        callback(null, res);
+                        if ('function' == typeof callback) { callback(null, res) };
                     },
                     error: function (res) {
-                        callback(res);
+                        if ('function' == typeof callback) { callback(res); }
                     }
                 });
             };
@@ -55,10 +69,10 @@
                     dataType: 'json',
                     success: function (res) {
                         self.projects = res;
-                        callback(null, res);
+                        if ('function' == typeof callback) { callback(null, res) };
                     },
                     error: function (res) {
-                        callback(res);
+                        if ('function' == typeof callback) { callback(res); }
                     }
                 });
             };

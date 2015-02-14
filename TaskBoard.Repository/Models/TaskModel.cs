@@ -21,5 +21,10 @@ namespace TaskBoard.Repository.Models
         public DateTime StartDate { get; set; }
         public DateTime DueDate { get; set; }
         public List<CommentModel> Comments { get; set; }
+
+        public TaskModel()
+        {
+            Comments = new List<CommentModel>();
+        }
     }
 }

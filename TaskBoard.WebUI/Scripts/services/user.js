@@ -24,9 +24,9 @@
                     type: 'POST',
                     dataType: 'json',
                     data: user,
-                    success: function (user) {
-                        self.user = user;
-                        callback(null, self.user);
+                    success: function (res) {
+                        self.user = res;
+                        callback(null, res);
                     },
                     error: function (err) {
                         self.user = false;
@@ -61,7 +61,7 @@
                 });
             };
             self.isAuthenticated = function () {
-                return user && user._id;
+                return self.user && (self.user._id || self.user.id);
             };
         };
         return new service();

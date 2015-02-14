@@ -18,9 +18,16 @@
                     Username: self.login(),
                     Password: self.password(),
                 },
-                function (err) {
-                    self.hasError(true);
-                    self.password('');
+                function (err, res) {
+                    if (err) {
+                        self.hasError(true);
+                        self.password('');
+                    } else {
+                        app.user.isAuthenticated(userService.isAuthenticated());
+                        app.list.loadProject(function () {
+                            $('.modal.in').hide();                           
+                        });                        
+                    }
                 })
             };
         }

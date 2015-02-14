@@ -55,6 +55,7 @@
     <Compile Include="Respositories\Abstract\IRepository.cs" />
     <Compile Include="Respositories\Abstract\IUserRepository.cs" />
     <Compile Include="Respositories\Abstract\Repository.cs" />
+    <Compile Include="Respositories\Test\FakeProjectRepository.cs" />
     <Compile Include="Respositories\Test\FakeUserRepository.cs" />
     <Compile Include="Respositories\ProjectRepository.cs" />
     <Compile Include="Respositories\UserRepository.cs" />

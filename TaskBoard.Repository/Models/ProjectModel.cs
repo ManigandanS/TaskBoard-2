@@ -18,5 +18,11 @@ namespace TaskBoard.Repository.Models
         public List<TaskModel> Tasks { get; set; }
         public List<UserModel> Participants { get; set; }
         public UserModel Owner { get; set; }
+
+        public ProjectModel()
+        {
+            Tasks = new List<TaskModel>();
+            Participants = new List<UserModel>();
+        }
     }
 }

@@ -29,9 +29,16 @@ namespace TaskBoard.WebUI.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public ProjectModel Read(string id)
+        public ProjectModel GetById(string id)
         {
             return _projectRepository.GetById(new ObjectId(id));
+        }
+
+        [Route("user/{username}")]
+        [HttpGet]
+        public IEnumerable<ProjectModel> GetByOwner(string username)
+        {
+            return _projectRepository.GetByOwner(username);
         }
 
         [HttpPut]

@@ -1,9 +1,14 @@
 ﻿(function (define, require) {
-    define(['ko', 'view-models/sign-in', 'view-models/sign-up'], function (ko, SignIn, SignUp) {
-        return function () {
+    define(['ko', 'view-models/sign-in', 'view-models/sign-up', 'services/user'], function (ko, SignIn, SignUp, userService) {
+        return function (app) {
             var self = this;
-            self.signIn = new SignIn();
-            self.signUp = new SignUp();
+            self.app = app;
+            self.signIn = new SignIn(app);
+            self.signUp = new SignUp(app);
+            self.isAuthenticated = ko.observable(userService.isAuthenticated());
+            self.signOut = function () {
+
+            };
         }
     });
 })(window.define, window.require);

@@ -1,14 +1,14 @@
 ﻿(function (define, require) {
-    define(['ko', 'services/user', 'services/rules'], function (ko, userService) {
+    define(['jquery', 'ko', 'services/user', 'services/rules'], function ($, ko, userService) {
         return function (app) {
             var self = this;
             self.app = app;
-            self.username = ko.observable('').extend({
-                required: true,
+            self.username = ko.observable('').extend({                
                 throttle: 750,
+                required: true,
                 pattern: {
                     message: 'Only letters and numbers.',
-                    params: /^[A-Za-z0-9_-]$/
+                    params: /^[A-Za-z0-9]{3,20}$/
                 },
                 uniqueUsername: {                    
                     message: 'Username already used.',
@@ -26,14 +26,17 @@
             self.fullname = ko.observable('').extend({
                 required: true,
                 pattern: {
-                    params: /^[A-Za-z]$/,
+                    params: /^[A-Za-z ]{3,48}$/,
                     message: 'Only letters and whitespace.',
                 }
             })
             self.confirm = ko.observable('').extend({
-                equals: {
-                    params: this.password,
-                    message: 'Password does not match confirmation.'
+                validation: {
+                    params: self.password,
+                    message: 'Password does not match confirmation.',
+                    validator: function (val, other) {
+                        return val === other;
+                    },
                 }
             });
             self.errors = ko.validation.group({
@@ -52,6 +55,15 @@
                     Email: self.email(),
                     Password: self.password(),
                     FullName: self.fullname()
+                }, function (err, res) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        app.user.isAuthenticated(userService.isAuthenticated());
+                        app.list.loadProject(function () {
+                            $('.modal.in').hide();
+                        });
+                    }
                 });
             };
         }
