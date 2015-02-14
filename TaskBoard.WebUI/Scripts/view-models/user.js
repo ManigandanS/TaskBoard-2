@@ -7,7 +7,9 @@
             self.signUp = new SignUp(app);
             self.isAuthenticated = ko.observable(userService.isAuthenticated());
             self.signOut = function () {
-
+                userService.signOut(function () {
+                    self.isAuthenticated(userService.isAuthenticated());
+                });
             };
         }
     });

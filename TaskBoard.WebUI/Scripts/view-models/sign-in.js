@@ -3,7 +3,7 @@
         return function (app) {
             var self = this;
             self.app = app;
-            self.hasError = ko.observable(false);
+            self.authError = ko.observable(false);
             self.login = ko.observable('').extend({ required: true });
             self.password = ko.observable('').extend({ required: true });
             self.errors = ko.validation.group({
@@ -20,8 +20,9 @@
                 },
                 function (err, res) {
                     if (err) {
-                        self.hasError(true);
-                        self.password('');
+                        self.authError(true);
+                        self.password('')
+                        self.password.clearError();
                     } else {
                         app.user.isAuthenticated(userService.isAuthenticated());
                         app.list.loadProject(function () {

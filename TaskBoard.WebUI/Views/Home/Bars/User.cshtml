@@ -10,6 +10,8 @@
         <a href="#signup"
            data-toggle="modal"
            data-target=".bs-modal-sm"
-           data-bind="visible: isAuthenticated()" style="display: none;"><span class=" btn">Sign Out</span></a>
+           data-bind="visible: isAuthenticated()" style="display: none;">
+            <span class="btn btn-default" data-bind="click: signOut">Sign Out</span>
+        </a>
     </li>
 </ul>

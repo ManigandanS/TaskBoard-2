@@ -49,28 +49,28 @@ namespace TaskBoard.WebUI.Controllers
             };
             _userRepository.Save(user);
             _projectRepository.Save(project);
-            user.Password = "";
             return user;
         }
 
         [Route("signin")]
         [HttpPost]
-        public UserModel SignIn(UserModel user)
+        public HttpResponseMessage SignIn(UserModel user)
         {
+            HttpResponseMessage res;
             UserModel model = _userRepository.GetByLogin(user.Username);
             if (model.Password == user.Password)
             {
                 model.Password = "";
-                return model;
+                return Request.CreateResponse<UserModel>(model);
             }
-            return null;
+            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Unauthorized");
         }
 
         [Route("signout")]
         [HttpPost]
         public void SignOut()
         {
-
+           
         }
     }
 }

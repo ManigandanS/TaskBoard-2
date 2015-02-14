@@ -2,7 +2,7 @@
     define(['jquery'], function ($) {
         var service = function () {
             var self = this;
-            self.signIn = function (user, done) {
+            self.signIn = function (user, callback) {
                 $.ajax({
                     url: 'api/auth/signin',
                     type: 'POST',
@@ -10,11 +10,11 @@
                     data: user,
                     success: function (user) {
                         self.user = user;
-                        done(null, self.user);
+                        if ('function' == typeof callback) { callback(null, self.user); }
                     },
                     error: function (err) {
                         self.user = false;
-                        done(err, self.user);
+                        if ('function' == typeof callback) { callback(err, self.user); }
                     }
                 });
             };
@@ -26,11 +26,24 @@
                     data: user,
                     success: function (res) {
                         self.user = res;
-                        callback(null, res);
+                        if ('function' == typeof callback) { callback(null, res); }
                     },
                     error: function (err) {
                         self.user = false;
-                        callback(err, self.user);
+                        if ('function' == typeof callback) { callback(err, self.user); }
+                    }
+                });
+            };
+            self.signOut = function (callback) {
+                $.ajax({
+                    url: 'api/auth/signout',
+                    type: 'POST',
+                    success: function () {
+                        self.user = false;
+                        callback();
+                    },
+                    error: function (err) {
+                        callback(err);
                     }
                 });
             };
@@ -47,16 +60,17 @@
                     }
                 });
             };
-            self.getUser = function (login, done) {
+            self.getUser = function (login, callback) {
                 $.ajax({
                     url: 'api/user/' + login,
                     type: 'GET',
                     dataType: 'json',
-                    success: function (user) {
-                        done(true);
+                    success: function (res) {
+                        delete self.user;
+                        callback(null, res);
                     },
                     error: function (err) {
-                        done(false);
+                        callback(err);
                     }
                 });
             };
