@@ -1184,7 +1184,6 @@
     <Content Include="bower_components\knockout\src\virtualElements.js" />
     <Content Include="bower_components\requirejs\require.js" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\lib\ko.dateBindings.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\services\rules.js" />
     <Content Include="Scripts\services\project.js" />
@@ -1418,6 +1417,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Modal\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\lib\ko.mapping.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

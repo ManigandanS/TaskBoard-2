@@ -16,7 +16,7 @@ namespace TaskBoard.Repository.Respositories
         public void AddTask(TaskModel task, string projectId)
         {
             ProjectModel project = __projects.Where(p => p._id == ObjectId.Parse(projectId)).First();
-            task._id = ObjectId.GenerateNewId();
+            task._id = ObjectId.GenerateNewId().ToString();
             project.Tasks.Add(task);
         }
 

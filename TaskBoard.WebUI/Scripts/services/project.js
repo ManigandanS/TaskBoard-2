@@ -39,7 +39,7 @@
                     dataType: 'json',
                     data: task,
                     success: function (res) {
-                        self.projects = res;
+                        self.project.Tasks.push(res);
                         if ('function' == typeof callback) { callback(null, res) };
                     },
                     error: function (res) {
@@ -54,7 +54,12 @@
                     dataType: 'json',
                     data: task,
                     success: function (res) {
-                        self.projects = res;
+                        var task = self.project.Tasks.filter(function (entry) {
+                            return res._id == entry._id;
+                        })[0];
+                        for (var prop in task) {
+                            task[prop] = res.prop;
+                        }
                         if ('function' == typeof callback) { callback(null, res) };
                     },
                     error: function (res) {

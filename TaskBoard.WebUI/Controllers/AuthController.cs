@@ -56,11 +56,9 @@ namespace TaskBoard.WebUI.Controllers
         [HttpPost]
         public HttpResponseMessage SignIn(UserModel user)
         {
-            HttpResponseMessage res;
             UserModel model = _userRepository.GetByLogin(user.Username);
             if (model.Password == user.Password)
             {
-                model.Password = "";
                 return Request.CreateResponse<UserModel>(model);
             }
             return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Unauthorized");

@@ -1,5 +1,5 @@
 ﻿<div class="row" data-bind="with: list">
-    <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="col-lg-4 col-md-4">
         <div class="panel panel-danger">
             <div class="panel-heading text-center">
                 <h5 class="panel-title">Open</h5>
@@ -11,39 +11,45 @@
                         data-target=".bs-modal-create">
                     Add
                 </button>
-                <div data-bind="sortable: { data: open }">
-                    <div>
-                        <span class="h5" data-bind="text: Title"></span>
+                <div data-bind="sortable: { data: open }" class="dropzone">
+                    <div class="well">
+                        <div>
+                            <span class="h5" data-bind="text: Title"></span>
+                        </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="col-lg-4 col-md-4">
         <div class="panel panel-warning">
             <div class="panel-heading text-center">
                 <h5 class="panel-title">InProgress</h5>
             </div>
             <div class="panel-body">
-                <div data-bind="sortable: { data: prog }">
-                    <div>
-                        <span class="h5" data-bind="text: Title"></span>
+                <div data-bind="sortable: { data: prog }" class="dropzone">
+                    <div class="well">
+                        <div>
+                            <span class="h5" data-bind="text: Title"></span>
+                        </div>
                     </div>
-                </div>     
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="col-lg-4 col-md-4">
         <div class="panel panel-success">
             <div class="panel-heading text-center">
                 <h5 class="panel-title">Done</h5>
             </div>
             <div class="panel-body">
-                <div data-bind="sortable: { data: done }">
-                    <div>
-                        <span class="h5" data-bind="text: Title"></span>
+                <div data-bind="sortable: { data: done }" class="dropzone">
+                    <div class="well">
+                        <div>
+                            <span class="h5" data-bind="text: Title"></span>
+                        </div>
                     </div>
-                </div>     
+                </div>
             </div>
         </div>
     </div>

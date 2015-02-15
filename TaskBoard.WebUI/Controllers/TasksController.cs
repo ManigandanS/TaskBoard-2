@@ -20,6 +20,7 @@ namespace TaskBoard.WebUI.Controllers
         }
 
         [HttpPost]
+        [Route("task")]
         public TaskModel Create(string projectId, TaskModel task)
         {
             _projectRepository.AddTask(task, projectId);
@@ -27,6 +28,7 @@ namespace TaskBoard.WebUI.Controllers
         }
 
         [HttpPut]
+        [Route("task")]
         public TaskModel Update(string projectId, TaskModel task)
         {
             _projectRepository.UpdateTask(task);
@@ -34,6 +36,7 @@ namespace TaskBoard.WebUI.Controllers
         }
 
         [HttpDelete]
+        [Route("task")]
         public string Delete(string projectId, TaskModel task)
         {
             _projectRepository.RemoveTask(task);

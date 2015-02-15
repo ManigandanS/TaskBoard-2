@@ -23,12 +23,17 @@
                     projectService.createTask({
                         Title: self.title(),
                         Description: self.desc(),
+                        Status: 'open',
                         StartDate: self.startDate(),
                         DueDate: self.dueDate()
-                    }, function (res) {
-                        self.pending(false);
-                        $('#createModal').modal('hide');
-                        app.list.open.push(res);
+                    }, function (err, res) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            self.pending(false);
+                            $('.modal.in').hide();
+                            app.list.open.push(ko.mapping.fromJS(res));
+                        }
                     })
                 }
             }

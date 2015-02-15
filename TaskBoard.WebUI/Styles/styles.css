@@ -1,3 +1,7 @@
 ﻿.autosize {
     resize: none;
 }
+
+.dropzone {
+    min-height: 50px;
+}
