@@ -2251,7 +2251,7 @@ th {
 .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.846;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #dddddd;
 }
 .table > thead > tr > th {
@@ -4159,7 +4159,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   float: left;
   padding: 20.5px 15px;
   font-size: 17px;
-  line-height: 23px;
+  line-height: 36px;
   height: 64px;
 }
 .navbar-brand:hover,

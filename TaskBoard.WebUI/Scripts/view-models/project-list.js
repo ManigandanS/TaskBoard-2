@@ -3,12 +3,7 @@
         return function (app) {
             var self = this;
             self.app = app;
-            self.open = ko.observableArray();
-            self.open.status = 'open'
-            self.inProgress = ko.observableArray();
-            self.inProgress.status = 'inProgress'
-            self.done = ko.observableArray();
-            self.done.status = 'done'
+            self.projects = ko.observableArray();
             self.loadProject = function (callback) {
                 projectService.getUsersProjects(function (err, projects) {
                     if (err) {
@@ -30,10 +25,14 @@
                         callback();
                     }
                 });
-            }
-            ko.bindingHandlers.sortable.afterMove = function (args) {
-                args.item.Status(args.targetParent.status);
-                projectService.updateTask(ko.mapping.toJS(args.item));
+            };
+            self.select = function (project) {
+                var select = projectService.projects.filter(function (entry) {
+                    entry._id === project._id();
+                })[0];
+                projectService.selectProject(select);
+                app.tasks.openProject(select);
+                app.view('tasks');
             };
         }
     });
