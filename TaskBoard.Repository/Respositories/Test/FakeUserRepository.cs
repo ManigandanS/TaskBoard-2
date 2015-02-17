@@ -72,5 +72,13 @@ namespace TaskBoard.Repository.Respositories
         {
             throw new NotImplementedException();
         }
+
+
+        public List<UserModel> Find(string query)
+        {
+            return __users
+                .Where(u => u.Username.Contains(query) || u.Email.Contains(query) || u.FullName.Contains(query))
+                .ToList();
+        }
     }
 }

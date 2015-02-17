@@ -9,6 +9,7 @@ using TaskBoard.Repository.Respositories;
 
 namespace TaskBoard.WebUI.Controllers
 {
+    [RoutePrefix("api/users")]
     public class UsersController : ApiController
     {
         private readonly IUserRepository _userRepository;
@@ -18,14 +19,13 @@ namespace TaskBoard.WebUI.Controllers
             _userRepository = userRepository;
         }
 
-        [Route("api/users")]
         [HttpGet]
         public UserModel Get(string login)
         {
             return _userRepository.GetByLogin(login);
         }
 
-        [Route("api/users/exists")]
+        [Route("exists")]
         [HttpGet]
         public HttpResponseMessage IsExists(string login)
         {
@@ -33,6 +33,12 @@ namespace TaskBoard.WebUI.Controllers
             return (null != user)
                 ? Request.CreateErrorResponse(HttpStatusCode.Conflict, login)
                 : Request.CreateResponse<string>(HttpStatusCode.OK, login);
+        }
+
+        [HttpGet]
+        public IEnumerable<UserModel> Search(string q)
+        {
+            return _userRepository.Find(q);
         }
     }
 }

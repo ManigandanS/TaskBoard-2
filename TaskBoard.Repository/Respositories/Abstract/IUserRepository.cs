@@ -11,5 +11,6 @@ namespace TaskBoard.Repository.Respositories
     public interface IUserRepository : IRepository<UserModel>
     {
         UserModel GetByLogin(string login);
+        List<UserModel> Find(string query);
     }
 }

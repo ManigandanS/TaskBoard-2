@@ -27,5 +27,16 @@ namespace TaskBoard.Repository.Respositories
                     Query<UserModel>.EQ(u => u.Username, login),
                     Query<UserModel>.EQ(u => u.Email, login)));
         }
+
+
+        public List<UserModel> Find(string query)
+        {
+            return Collection.Find(
+                Query.Or(
+                Query<UserModel>.Matches(u => u.Username, query),
+                Query<UserModel>.Matches(u => u.Email, query),
+                Query<UserModel>.Matches(u => u.FullName, query)
+                )).ToList();
+        }
     }
 }
