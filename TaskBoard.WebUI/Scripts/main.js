@@ -4,7 +4,9 @@
             jquery: '../bower_components/jquery/dist/jquery',
         }
     });
-    require(['ko', 'view-models/app',], function (ko, App) {
+    require(
+    ['ko', 'vm/app', ],
+    function (ko, App) {
         $(function () {
             //bootstrap app
             $('.datepicker').datepicker({

@@ -1,5 +1,7 @@
 ﻿(function (define, require) {
-    define(['ko', 'services/project'], function (ko, projectService) {
+    define(
+    ['ko', 'services/project'],
+    function (ko, projectService) {
         return function (app) {
             var self = this;
             var columns = [

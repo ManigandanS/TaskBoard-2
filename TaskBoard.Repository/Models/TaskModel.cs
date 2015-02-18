@@ -17,7 +17,7 @@ namespace TaskBoard.Repository.Models
         public string Status { get; set; }
         public string Description { get; set; }
         public UserModel Source { get; set; }
-        public UserModel AsignedTo { get; set; }
+        public List<UserModel> AssignedTo { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime DueDate { get; set; }
@@ -26,6 +26,7 @@ namespace TaskBoard.Repository.Models
         public TaskModel()
         {
             Comments = new List<CommentModel>();
+            AssignedTo = new List<UserModel>();
         }
     }
 }

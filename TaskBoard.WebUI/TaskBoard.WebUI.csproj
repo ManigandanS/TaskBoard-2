@@ -879,19 +879,19 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\lib\touch-punch.js" />
     <Content Include="Scripts\main.js" />
-    <Content Include="Scripts\services\collapseable.js" />
-    <Content Include="Scripts\services\rules.js" />
-    <Content Include="Scripts\services\project.js" />
-    <Content Include="Scripts\services\user.js" />
-    <Content Include="Scripts\view-models\app.js" />
+    <Content Include="Scripts\svc\collapseable.js" />
+    <Content Include="Scripts\svc\rules.js" />
+    <Content Include="Scripts\svc\project.js" />
+    <Content Include="Scripts\svc\user.js" />
+    <Content Include="Scripts\vm\app.js" />
     <Content Include="Scripts\ko.js" />
-    <Content Include="Scripts\view-models\create-task.js" />
-    <Content Include="Scripts\view-models\edit-project.js" />
-    <Content Include="Scripts\view-models\project-list.js" />
-    <Content Include="Scripts\view-models\sign-in.js" />
-    <Content Include="Scripts\view-models\sign-up.js" />
-    <Content Include="Scripts\view-models\task-list.js" />
-    <Content Include="Scripts\view-models\user.js" />
+    <Content Include="Scripts\vm\create-task.js" />
+    <Content Include="Scripts\vm\edit-project.js" />
+    <Content Include="Scripts\vm\project-list.js" />
+    <Content Include="Scripts\vm\sign-in.js" />
+    <Content Include="Scripts\vm\sign-up.js" />
+    <Content Include="Scripts\vm\task-list.js" />
+    <Content Include="Scripts\vm\user.js" />
     <Content Include="Styles\cosmo.css" />
     <Content Include="Styles\paper.css" />
     <Content Include="Styles\styles.css" />
@@ -940,7 +940,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\view-models\edit-task.js" />
+    <Content Include="Scripts\vm\edit-task.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\knockout-validation\dist\knockout.validation.min.js.map" />
@@ -977,6 +977,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\lib\ko.typehead.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index - Copy.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

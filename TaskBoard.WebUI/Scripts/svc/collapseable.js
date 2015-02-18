@@ -3,21 +3,22 @@
         var service = function () {
             var self = this;
             self.update = function () {
-                $('.panel-heading span.clickable').on("click", function (e) {
-                    if ($(this).hasClass('panel-collapsed')) {
+                $('.collapse-toggle').off();
+                $('.collapse-toggle').on("click", function (e) {
+                    if ($(this).hasClass('collapsed')) {
                         // expand the panel
-                        $(this).closest('.panel').find('.panel-body').slideDown();
+                        $(this).closest('.panel').find('.collapse-body').first().slideDown();
                         $(this).removeClass('panel-collapsed');
                         $(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
                     }
                     else {
                         // collapse the panel
-                        $(this).closest('.panel').find('.panel-body').slideUp();
+                        $(this).closest('.collapse-target').find('.collapse-body').first().slideUp();
                         $(this).addClass('panel-collapsed');
                         $(this).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
                     }
                 });
-                $('.panel-heading span.panel-collapsed').closest('.panel').find('.panel-body').slideUp();
+                $('.collapsed').find('.collapse-body').slideUp();
             }
         };
         return new service();
