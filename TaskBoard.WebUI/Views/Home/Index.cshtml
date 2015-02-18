@@ -6,6 +6,7 @@
   <link href="~/Styles/styles.css" rel="stylesheet" />
   <link href="~/bower_components/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
   <link href="~/bower_components/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+  <link href="~/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <script src="~/bower_components/jquery/dist/jquery.js"></script>
   <script src="~/bower_components/jquery-ui/jquery-ui.js"></script>
   <script src="~/Scripts/lib/touch-punch.js"></script>
@@ -37,8 +38,14 @@
         </div>
       </nav>
     </header>
+    <!--Project List-->
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" data-bind="with: projectList">
+        <div class="col-lg-12">
+          <center>
+            <button class="btn btn-lg btn-primary" data-bind="click: create">Create Project</button>
+          </center>
+        </div>
         <div class="col-lg-12">
           <div data-bind="foreach: projects">
             <section class="panel panel-default collapse-target collapsed">
@@ -49,7 +56,7 @@
               <div class="well" data-bind="text: Description"></div>
               <span class="label label-default" data-bind="foreach: AssignedTo">
                 <span data-bind="text: FullName"></span>
-              </span> 
+              </span>
               <div class="panel-body collapse-body">
                 <div class="col-lg-4 col-md-4 col-sm-6" data-bind="foreach: columns">
                   <section class="panel collapse-target collapsed panel-danger" data-bind="css: cssClass">
@@ -69,7 +76,7 @@
                               <label class="control-label">Assigned to:</label>
                               <span class="label label-default" data-bind="foreach: AssignedTo">
                                 <span data-bind="text: FullName"></span>
-                              </span> 
+                              </span>
                             </div>
                             <div class="well well-sm" data-bind="text: Description">Description</div>
                             <div class="form-group row">
@@ -97,6 +104,277 @@
       </div>
     </div>
   </div>
+  <!--/Project List-->
+  <!--Modals-->
+  <!--Auth Modal-->
+  <div class="modal fade bs-modal-sm"
+       id="authModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="mySmallModalLabel"
+       aria-hidden="true"
+       data-bind="with: user">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <br>
+        <div class="bs-example bs-example-tabs">
+          <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#signIn" data-toggle="tab">Sign In</a></li>
+            <li class=""><a href="#signUp" data-toggle="tab">Sifn Up</a></li>
+          </ul>
+        </div>
+        <div class="modal-body">
+          <div id="myTabContent" class="tab-content">
+            <!--Sign In tab-->
+            <div class="tab-pane fade active in" id="signIn"
+                 data-bind="with: signIn">
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <fieldset>
+                    <div class="form-group">
+                      <div class="controls">
+                        <input type="text"
+                               class="form-control input-medium"
+                               placeholder="Login or E-mail"
+                               data-bind="textInput: login">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="controls">
+                        <input type="password"
+                               class="form-control input-medium"
+                               placeholder="Password"
+                               data-bind="textInput: password" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <span class="label label-danger"
+                            data-bind="visible: authError">Combiantion of login and password not found</span>
+                      <div class="controls">
+                        <button class="btn btn-success"
+                                type="button"
+                                data-bind="enable: enabled, click: signIn">
+                          <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Sign In
+                        </button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+            <!--/Sign In tab-->
+            <!--Sign Up tab-->
+            <div class="tab-pane fade" id="signUp"
+                 data-bind="with: signUp">
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <fieldset>
+                    <div class="form-group">
+                      <input class="form-control input-large"
+                             type="text"
+                             placeholder="Username"
+                             data-bind="textInput: username">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control input-large"
+                             type="text"
+                             placeholder="Email"
+                             data-bind="textInput: email">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control input-large"
+                             type="text"
+                             placeholder="Full Name"
+                             data-bind="textInput: fullname">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control input-large"
+                             type="password"
+                             placeholder="Pasword"
+                             data-bind="textInput: password">
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control input-large"
+                             type="password"
+                             placeholder="Confirm password"
+                             data-bind="textInput: confirm">
+                    </div>
+                    <div class="form-group">
+                      <div class="controls">
+                        <button type="button" class="btn btn-success"
+                                data-bind="click: signUp, enable: enabled">
+                          <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Sign Up
+                        </button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+            <!--/Sign Up tab-->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <center>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Auth Modal-->
+  <!--Create / Edit Project Modal-->
+  <div class="modal fade bs-modal-project"
+       id="createModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="mySmallModalLabel"
+       aria-hidden="true"
+       data-bind="with: project">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <fieldset>
+                <legend data-bind="text: dialogTitle"></legend>
+                <div class="form-group">
+                  <div class="controls">
+                    <label class="control-label">Title:</label>
+                    <input type="text"
+                           class="form-control input-medium"
+                           placeholder="Title"
+                           data-bind="textInput: Title">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <label class="control-label">Description:</label>
+                    <textarea class="form-control autosize"
+                              placeholder="Description..."
+                              data-bind="textInput: Description"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <button class="btn btn-success"
+                            data-bind="enable: enabled, click: confirm">
+                      <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Confirm
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <center>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Create / Edit Project Modal-->
+  <!--Create / Edit Task Modal-->
+  <div class="modal fade bs-modal-task"
+       id="createModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="mySmallModalLabel"
+       aria-hidden="true"
+       data-bind="with: task">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-body">
+            <form class="form-horizontal">
+              <fieldset>
+                <legend data-bind="text: dialogTitle"></legend>
+                <div class="form-group">
+                  <div class="controls">
+                    <label class="control-label">Title:</label>
+                    <input type="text"
+                           class="form-control input-medium"
+                           placeholder="Title"
+                           data-bind="textInput: title">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <label class="control-label">Description:</label>
+                    <textarea class="form-control autosize"
+                              placeholder="Description..."
+                              data-bind="textInput: desc"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <label class="control-label">Start Date:</label>
+                    <input type="text"
+                           class="form-control input-medium datepicker"
+                           placeholder="Title"
+                           data-bind="textInput: startDate">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <label class="control-label">Due Date:</label>
+                    <input type="text"
+                           class="form-control input-medium datepicker"
+                           placeholder="Title"
+                           data-bind="textInput: dueDate">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="controls">
+                    <button class="btn btn-success"
+                            data-bind="enable: enabled, click: create">
+                      <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Confirm
+                    </button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <center>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Create / Edit Task Modal-->
+  <!--OK /Cancel-->
+  <div class="modal fade bs-modal-ok-cancel"
+       id="createModal"
+       tabindex="-1"
+       role="dialog"
+       aria-labelledby="mySmallModalLabel"
+       aria-hidden="true"
+       data-bind="with: okCancel">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <span class="h4" data-bind="text: message"></span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="row">
+        <div class="col-xs-6 text-center">
+          <button type="button" class="btn btn-success" data-bind="click: ok"><i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Ok</button>
+        </div>
+        <div class="col-xs-6 text-center">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/OK /Cancel-->
+  <!--/Modals-->
 </body>
 
 </html>

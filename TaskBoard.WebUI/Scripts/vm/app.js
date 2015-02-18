@@ -1,17 +1,16 @@
 ﻿(function (define, require) {
     define(
-    ['ko', 'vm/user', 'vm/create-task', 'vm/edit-task', 'vm/create-project', 'vm/edit-project', 'vm/project-list'],
-    function (ko, User, CreateTask, EditTask, CreateProject, EditProject, ProjectList) {
+    ['ko', 'vm/user', 'vm/task', 'vm/project', 'vm/project-list', 'vm/ok-cancel'],
+    function (ko, User, Task, Project, ProjectList, OkCancel) {
         return function () {
             var self = this;
             self.user = new User(self);
 
             self.projectList = new ProjectList(self);
-            self.editProject = new EditTask(self);
-            self.createProject = new EditTask(self);
+            self.project = new Project(self);
 
-            self.createTask = new CreateTask(self);
-            self.editTask = new EditTask(self);
+            self.task = new Task(self);
+            self.okCancel = new OkCancel(self);
         }
     });
 })(window.define, window.require);

@@ -9,8 +9,6 @@
                 self.desc = ko.observable('').extend({ required: true });
                 self.startDate = ko.observable('').extend({ required: true });
                 self.dueDate = ko.observable('').extend({ required: true });
-                self.asignedTo = ko.observable('').extend({ required: true });
-                self.source = ko.observable('').extend({ required: true });
                 self.errors = ko.validation.group({
                     title: self.title,
                     desc: self.desc,
@@ -18,25 +16,24 @@
                     dueDate: self.dueDate,
                     asignedTo: self.asignedTo,
                     source: self.source
-                })
+                });
+                self.open = function (title, task, callback) {
+                    self.dialogTitle(title);
+                    self.callback = callback;
+                    self.title(task.Title());
+                    self.desc(task.Description());
+                    self.startDate(task.StartDate());
+                    self.dueDate(task.DueDate());
+                }
                 self.enabled = ko.computed(function () {
                     return 0 === self.errors().length && !self.pending();
                 });
-                self.projectUsers = function (query, callback) {
-                    callback(projectService.project.Participants);
-                };
-                self.asignedToSelect = function (item) {
-                    self.asignedToUserModel = item;
-                };
-                self.sourceSelect = function (item) {
-                    self.sourceUserModel = item;
-                };
                 self.dysplayName = function (item) {
                     return item.FullName;
                 }
-                self.create = function () {
+                self.confirm = function () {
                     self.pending(true);
-                    projectService.createTask({
+                    self.callback({
                         Title: self.title(),
                         Description: self.desc(),
                         Status: 'open',
@@ -47,7 +44,7 @@
                             console.log(err);
                         } else {
                             self.pending(false);
-                            $('.modal.in').hide();
+                            $('.bs-modal-task').hide();
                             app.list.open.push(ko.mapping.fromJS(res));
                         }
                     })

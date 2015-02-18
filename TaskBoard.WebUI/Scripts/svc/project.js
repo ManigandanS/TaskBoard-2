@@ -2,23 +2,8 @@
     define(['jquery', 'services/user'], function ($, userService) {
         var service = function () {
             var self = this;
-            self.projects = [];
-            self.project = {};
+            self.projects = [];            
             self.getProjects = function (callback) {
-                $.ajax({
-                    url: 'api/projects',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (res) {
-                        self.projects = res;
-                        if ('function' == typeof callback) { callback(null, res) };
-                    },
-                    error: function (res) {
-                        if ('function' == typeof callback) { callback(res); }
-                    }
-                });
-            };
-            self.getUsersProjects = function (callback) {
                 $.ajax({
                     url: 'api/projects/user/' + userService.user.Username,
                     type: 'GET',
@@ -32,9 +17,9 @@
                     }
                 });
             };
-            self.createTask = function (task, callback) {
+            self.createTask = function (projectId, task, callback) {
                 $.ajax({
-                    url: 'api/projects/' + self.project._id + '/task',
+                    url: 'api/projects/' + projectId + '/task',
                     type: 'POST',
                     dataType: 'json',
                     data: task,
@@ -47,9 +32,9 @@
                     }
                 });
             };
-            self.updateTask = function (task, callback) {
+            self.updateTask = function (projectId, task, callback) {
                 $.ajax({
-                    url: 'api/projects/' + self.project._id + '/task',
+                    url: 'api/projects/' + projectId + '/task',
                     type: 'PUT',
                     dataType: 'json',
                     data: task,
@@ -67,9 +52,9 @@
                     }
                 });
             };
-            self.deleteTask = function (task, callback) {
+            self.deleteTask = function (projectId, task, callback) {
                 $.ajax({
-                    url: 'api/projects/' + self.project._id + '/task/' + task._id,
+                    url: 'api/projects/' + projectId + '/task/' + task._id,
                     type: 'POST',
                     dataType: 'json',
                     success: function (res) {
@@ -80,9 +65,6 @@
                         if ('function' == typeof callback) { callback(res); }
                     }
                 });
-            };
-            self.selectProject = function (project) {
-                self.project = project;
             };
         }
         return new service();
