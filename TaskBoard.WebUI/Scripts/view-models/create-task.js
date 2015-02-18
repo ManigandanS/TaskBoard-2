@@ -9,15 +9,31 @@
                 self.desc = ko.observable('').extend({ required: true });
                 self.startDate = ko.observable('').extend({ required: true });
                 self.dueDate = ko.observable('').extend({ required: true });
+                self.asignedTo = ko.observable('').extend({ required: true });
+                self.source = ko.observable('').extend({ required: true });
                 self.errors = ko.validation.group({
                     title: self.title,
                     desc: self.desc,
                     startDate: self.startDate,
-                    dueDate: self.dueDate
+                    dueDate: self.dueDate,
+                    asignedTo: self.asignedTo,
+                    source: self.source
                 })
                 self.enabled = ko.computed(function () {
                     return 0 === self.errors().length && !self.pending();
                 });
+                self.projectUsers = function (query, callback) {
+                    callback(projectService.project.Participants);
+                };
+                self.asignedToSelect = function (item) {
+                    self.asignedToUserModel = item;
+                };
+                self.sourceSelect = function (item) {
+                    self.sourceUserModel = item;
+                };
+                self.dysplayName = function (item) {
+                    return item.FullName;
+                }
                 self.create = function () {
                     self.pending(true);
                     projectService.createTask({

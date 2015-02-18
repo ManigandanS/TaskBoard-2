@@ -35,6 +35,7 @@ namespace TaskBoard.WebUI.Controllers
                 : Request.CreateResponse<string>(HttpStatusCode.OK, login);
         }
 
+        [Route("search")]
         [HttpGet]
         public IEnumerable<UserModel> Search(string q)
         {

@@ -14,6 +14,7 @@
     <script src="~/bower_components/jquery-autosize/jquery.autosize.js"></script>
     <script src="~/bower_components/knockout/dist/knockout.js"></script>
     <script src="~/Scripts/lib/ko.mapping.js"></script>
+    <script src="~/Scripts/lib/ko.typehead.js"></script>
     <script src="~/bower_components/knockout-sortable/build/knockout-sortable.js"></script>
     <script src="~/bower_components/knockout-validation/dist/knockout.validation.js"></script>
     <script data-main="@Url.Content("~/Scripts/main.js")" src="~/bower_components/requirejs/require.js"></script>
@@ -38,12 +39,101 @@
         </header>
         <div class="container-fluid">
             <div class="row">
-                @Html.Partial("Panels/TaskList")
+                <div data-bind="with: createProject">
+                    <div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="well">
+                            <fieldset>
+                                <legend>New Task</legend>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" data-bind="textInput: Title" />
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control autosize" type="text" data-bind="textInput: Description"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control"
+                                           type="text"
+                                           data-bind="typehead: { minLength: 2, source: projectUsers, displayText: dysplayName, afterSelect: asignedToSelect }, textInput: asignedTo"
+                                           placeholder="Asigned To" />
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control"
+                                           type="text"
+                                           data-bind="typehead: { minLength: 2, source: projectUsers, displayText: dysplayName, afterSelect: sourceSelect }, textInput: source"
+                                           placeholder="Source" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Title</label>
+                                    <input class="form-control" type="text" />
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="row" data-bind="with: taskList">
+                    <div>
+                        <h1 data-bind="text: projectName"></h1>
+                    </div>                    
+                    <div class="col-lg-4 col-md-4">
+                        <section class="panel panel-danger">
+                            <div class="panel-heading">
+                                <div class="panel-title text-center">Open</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dropzone list-group" data-bind="sortable: { data: open }">
+                                    <div class="well task" data-bind="event: { touchend: $parent.edit, click: $parent.edit }">
+                                        <div>
+                                            <span class="h5" data-bind="text: Title"></span>
+                                        </div>
+                                        <small><span class="pull-right" data-bind="text: date()"></span></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <section class="panel panel-warning">
+                            <div class="panel-heading">
+                                <div class="panel-title text-center">InProgress</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dropzone list-group" data-bind="sortable: { data: inProgress }">
+                                    <div class="well task" data-bind="event: { touchend: $parent.edit }">
+                                        <div>
+                                            <span class="h5" data-bind="text: Title"></span>
+                                        </div>
+                                        <small><span class="pull-right" data-bind="text: date()"></span></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <section class="panel panel-success">
+                            <div class="panel-heading">
+                                <div class="panel-title text-center">Done</div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dropzone list-group" data-bind="sortable: { data: done }">
+                                    <div class="well task" data-bind="event: { touchend: $parent.edit }">
+                                        <div>
+                                            <span class="h5" data-bind="text: Title"></span>
+                                        </div>
+                                        <small><span class="pull-right" data-bind="text: date()"></span></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>   
             </div>
         </div>
     </div>
-    @Html.Partial("Modal/Auth")
-    @Html.Partial("Modal/Create")
 </body>
 
 </html>

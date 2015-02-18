@@ -879,12 +879,14 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\lib\touch-punch.js" />
     <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\services\collapseable.js" />
     <Content Include="Scripts\services\rules.js" />
     <Content Include="Scripts\services\project.js" />
     <Content Include="Scripts\services\user.js" />
     <Content Include="Scripts\view-models\app.js" />
     <Content Include="Scripts\ko.js" />
-    <Content Include="Scripts\view-models\create.js" />
+    <Content Include="Scripts\view-models\create-task.js" />
+    <Content Include="Scripts\view-models\edit-project.js" />
     <Content Include="Scripts\view-models\project-list.js" />
     <Content Include="Scripts\view-models\sign-in.js" />
     <Content Include="Scripts\view-models\sign-up.js" />
@@ -972,6 +974,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Panels\ProjectList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\lib\ko.typehead.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
