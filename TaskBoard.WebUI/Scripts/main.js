@@ -1,12 +1,16 @@
 ﻿(function (define, require, $) {
-    require.config({
-        paths: {
-            jquery: '../bower_components/jquery/dist/jquery',
-        }
+  require.config({
+    shim: {
+      "bootstrap": { "deps": ['jquery'] }
+    },
+    paths: {
+      jquery: '../bower_components/jquery/dist/jquery',
+      bootstrap: '../bower_components/bootstrap/dist/js/bootstrap'
+    }
     });
     require(
-    ['ko', 'vm/app', ],
-    function (ko, App) {
+    ['ko', 'vm/app', 'bootstrap'],
+    function (ko, App, bs) {
         $(function () {
             //bootstrap app
             $('.datepicker').datepicker({

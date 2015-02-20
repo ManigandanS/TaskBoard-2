@@ -10,10 +10,10 @@
   <script src="~/bower_components/jquery/dist/jquery.js"></script>
   <script src="~/bower_components/jquery-ui/jquery-ui.js"></script>
   <script src="~/Scripts/lib/touch-punch.js"></script>
-  <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="~/bower_components/jquery-autosize/jquery.autosize.js"></script>
   <script src="~/bower_components/knockout/dist/knockout.js"></script>
+  <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="~/Scripts/lib/ko.mapping.js"></script>
   <script src="~/Scripts/lib/ko.typehead.js"></script>
   <script src="~/bower_components/knockout-sortable/build/knockout-sortable.js"></script>
@@ -97,14 +97,14 @@
   </div>
   <!--/Project List-->
   <!--Modals-->
-  <!--Auth Modal-->
-  <div class="modal fade bs-modal-user"
-       id="authModal"
+  <!--User Modal-->
+  <div class="modal fade"
+       id="userModal"
        tabindex="-1"
        role="dialog"
        aria-labelledby="mySmallModalLabel"
        aria-hidden="true"
-       data-bind="with: user">
+       data-bind="with: userModal">
     <div class="modal-dialog ">
       <div class="modal-content">
         <br>
@@ -215,13 +215,13 @@
   </div>
   <!--/Auth Modal-->
   <!--Create / Edit Project Modal-->
-  <div class="modal fade bs-modal-project"
-       id="createModal"
+  <div class="modal fade"
+       id="projectModal"
        tabindex="-1"
        role="dialog"
        aria-labelledby="mySmallModalLabel"
        aria-hidden="true"
-       data-bind="with: project">
+       data-bind="with: projectModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
@@ -235,7 +235,7 @@
                     <input type="text"
                            class="form-control input-medium"
                            placeholder="Title"
-                           data-bind="textInput: Title">
+                           data-bind="textInput: title">
                   </div>
                 </div>
                 <div class="form-group">
@@ -243,7 +243,7 @@
                     <label class="control-label">Description:</label>
                     <textarea class="form-control autosize"
                               placeholder="Description..."
-                              data-bind="textInput: Description"></textarea>
+                              data-bind="textInput: desc"></textarea>
                   </div>
                 </div>
                 <div class="form-group">
@@ -268,13 +268,13 @@
   </div>
   <!--/Create / Edit Project Modal-->
   <!--Create / Edit Task Modal-->
-  <div class="modal fade bs-modal-task"
-       id="createModal"
+  <div class="modal fade"
+       id="taskModal"
        tabindex="-1"
        role="dialog"
        aria-labelledby="mySmallModalLabel"
        aria-hidden="true"
-       data-bind="with: task">
+       data-bind="with: taskModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
@@ -320,7 +320,7 @@
                 <div class="form-group">
                   <div class="controls">
                     <button class="btn btn-success"
-                            data-bind="enable: enabled, click: create">
+                            data-bind="enable: enabled, click: confirm">
                       <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Confirm
                     </button>
                   </div>
@@ -339,13 +339,13 @@
   </div>
   <!--/Create / Edit Task Modal-->
   <!--OK /Cancel-->
-  <div class="modal fade bs-modal-ok-cancel"
-       id="createModal"
+  <div class="modal fade"
+       id="okCancelModal"
        tabindex="-1"
        role="dialog"
        aria-labelledby="mySmallModalLabel"
        aria-hidden="true"
-       data-bind="with: okCancel">
+       data-bind="with: okCancelModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">

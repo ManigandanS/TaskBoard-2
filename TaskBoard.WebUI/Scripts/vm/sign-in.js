@@ -4,7 +4,7 @@
   function (ko, userService) {
     return function (app) {
       var self = this;
-      self.userVM = userVM;
+      self.app = app;
       self.pending = ko.observable(false);
       self.authError = ko.observable(false);
       self.login = ko.observable('').extend({ required: true });

@@ -5,6 +5,7 @@
     var modal = function () {
       var self = this;
       self.viewModel = {};
+      self.viewModel.dialogTitle = ko.observable('');
       self.viewModel.pending = ko.observable(false);
       self.viewModel.title = ko.observable('').extend({ required: true });
       self.viewModel.desc = ko.observable('');
@@ -13,7 +14,7 @@
         title: self.title,
       })
       self.viewModel.enabled = ko.computed(function () {
-        return 0 === self.errors().length && !self.pending();
+        return 0 === self.viewModel.errors().length && !self.viewModel.pending();
       });
       self.viewModel.confirm = function () {
         self.pending(true);

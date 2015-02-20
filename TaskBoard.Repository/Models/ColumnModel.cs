@@ -11,5 +11,6 @@ namespace TaskBoard.Repository.Models
         public string Title { get; set; }
         public string CssClass { get; set; }
         public string Status { get; set; }
+        public bool AllowCreate { get; set; }
     }
 }
