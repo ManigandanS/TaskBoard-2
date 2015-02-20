@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ColumnModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\TaskModel.cs" />

@@ -1,5 +1,5 @@
 ﻿(function (define, require) {
-    define(['jquery', 'ko', 'services/user', 'services/rules'], function ($, ko, userService) {
+    define(['jquery', 'ko', 'svc/user', 'svc/rules'], function ($, ko, userService) {
         return function (app) {
             var self = this;
             self.app = app;
@@ -61,7 +61,7 @@
                     } else {
                         app.user.isAuthenticated(userService.isAuthenticated());
                         app.list.loadProject(function () {
-                            $('.modal.in').hide();
+                            $('.bs-modal-user').hide();
                         });
                     }
                 });

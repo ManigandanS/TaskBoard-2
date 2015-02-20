@@ -18,12 +18,15 @@ namespace TaskBoard.Repository.Models
         public DateTime StartDate { get; set; }
         public List<TaskModel> Tasks { get; set; }
         public List<UserModel> Participants { get; set; }
+        public List<ColumnModel> Columns { get; set; }
         public UserModel Owner { get; set; }
+        
 
         public ProjectModel()
         {
             Tasks = new List<TaskModel>();
             Participants = new List<UserModel>();
+            Columns = new List<ColumnModel>();
         }
     }
 }
