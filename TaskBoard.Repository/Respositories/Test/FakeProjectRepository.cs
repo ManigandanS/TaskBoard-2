@@ -28,11 +28,11 @@ namespace TaskBoard.Repository.Respositories
             project.Tasks.Add(task);
         }
 
-        public void RemoveTask(TaskModel model)
+        public void RemoveTask(string projectId, string taskId)
         {
-            ProjectModel project = __projects.Where(p => p.Tasks.Any(t => t._id == model._id)).First();
-            TaskModel old = project.Tasks.Where(t => t._id == model._id).First();
-            project.Tasks.Remove(old);
+            //ProjectModel project = __projects.Where(p => p.Tasks.Any(t => t._id == model._id)).First();
+            //TaskModel old = project.Tasks.Where(t => t._id == model._id).First();
+            //project.Tasks.Remove(old);
         }
 
         public List<ProjectModel> Get(MongoDB.Driver.IMongoQuery query, int skip, int take)

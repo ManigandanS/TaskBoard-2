@@ -18,6 +18,7 @@ namespace TaskBoard.Repository.Respositories
 
         public void AddTask(TaskModel task, string projectId)
         {
+            task._id = ObjectId.GenerateNewId().ToString();
             Collection.Update(
                 Query<ProjectModel>.EQ(p => p._id, projectId),
                 Update<ProjectModel>.AddToSet(p => p.Tasks, task));
@@ -35,11 +36,14 @@ namespace TaskBoard.Repository.Respositories
             Collection.Remove(Query<ProjectModel>.EQ(t => t._id, model._id), RemoveFlags.None);
         }
 
-        public void RemoveTask(TaskModel task)
+        public void RemoveTask(string projectId, string taskId)
         {
             Collection.Update(
-                Query.EQ("Tasks._id", task._id),
-                Update.PullWrapped<TaskModel>("Tasks.$", task));
+                Query<ProjectModel>.EQ(p => p._id, projectId),
+                Update.PullWrapped("Tasks", 
+                    Query<TaskModel>.EQ(t => t._id,  taskId)
+                )
+            );
         }
 
 

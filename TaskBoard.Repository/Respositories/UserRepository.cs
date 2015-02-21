@@ -13,7 +13,11 @@ namespace TaskBoard.Repository.Respositories
     public class UserRepository : Repository<UserModel>, IUserRepository
     {
         public UserRepository(string connectionString)
-            : base(connectionString, "taskboard", "users") { }
+            : base(connectionString, "taskboard", "users")
+        {
+            Collection.CreateIndex(new IndexKeysBuilder<UserModel>().Ascending(u => u.Username), IndexOptions.SetUnique(true));
+            Collection.CreateIndex(new IndexKeysBuilder<UserModel>().Ascending(u => u.Email), IndexOptions.SetUnique(true));
+        }
 
         public override void Remove(UserModel model)
         {

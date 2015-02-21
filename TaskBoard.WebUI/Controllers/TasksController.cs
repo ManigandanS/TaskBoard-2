@@ -6,10 +6,12 @@ using System.Net.Http;
 using System.Web.Http;
 using TaskBoard.Repository.Models;
 using TaskBoard.Repository.Respositories;
+using TaskBoard.WebUI.ActionFilters;
 
 namespace TaskBoard.WebUI.Controllers
 {
     [RoutePrefix("api/projects/{projectId}")]
+    [JwtAuthorize]
     public class TasksController : ApiController
     {
         private readonly IProjectRepository _projectRepository;
@@ -39,7 +41,7 @@ namespace TaskBoard.WebUI.Controllers
         [Route("task/{taskId}")]
         public string Delete(string projectId, string taskId)
         {
-            _projectRepository.RemoveTask(new TaskModel { _id = taskId });
+            _projectRepository.RemoveTask(projectId, taskId);
             return taskId;
         }
     }
