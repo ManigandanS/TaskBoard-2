@@ -19,7 +19,7 @@ namespace TaskBoard.Repository.Respositories
         public void AddTask(TaskModel task, string projectId)
         {
             Collection.Update(
-                Query<ProjectModel>.EQ(p => p._id, ObjectId.Parse(projectId)),
+                Query<ProjectModel>.EQ(p => p._id, projectId),
                 Update<ProjectModel>.AddToSet(p => p.Tasks, task));
         }
 
@@ -43,9 +43,12 @@ namespace TaskBoard.Repository.Respositories
         }
 
 
-        public List<ProjectModel> GetByOwner(string username)
+        public List<ProjectModel> GetByUser(string username)
         {
-            return Get(Query<ProjectModel>.EQ(p => p.Owner.Username, username),0 , int.MaxValue);
+            return Get(
+                query: Query.EQ("Participants.Username", username),
+                skip: 0 ,
+                take: int.MaxValue);
         }
     }
 }

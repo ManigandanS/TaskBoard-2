@@ -1,8 +1,7 @@
 ﻿(function (define, require) {
   define(['jquery', 'ko', 'svc/user', 'svc/rules'], function ($, ko, userService) {
-    return function (modal) {
+    return function () {
       var self = this;
-      self.modal = modal;
       self.pending = ko.observable(false);
       self.username = ko.observable('').extend({
         throttle: 750,
@@ -49,25 +48,20 @@
       self.enabled = ko.computed(function () {
         return 0 === self.errors().length;
       });
-      self.signUp = function () {
-        self.pending(true);
-        if (0 !== self.errors().length) { return; }
-        userService.signUp({
-          Username: self.username(),
-          Email: self.email(),
-          Password: self.password(),
-          FullName: self.fullname()
-        }, function (err, res) {
-          if (err) {
-            console.log(err);
-          } else {
-            app.user.isAuthenticated(userService.isAuthenticated());
-            app.list.loadProject(function () {
-              self.pending(false);
-              self.modal.hide();
-            });
-          }
-        });
+      self.clear = function () {
+        self.pending(false);
+        self.username('');
+        self.email('');
+        self.fullname('');
+        self.password('');
+        self.confirm('');
+        setTimeout(function () {
+          self.username.clearError();
+          self.email.clearError();
+          self.fullname.clearError();
+          self.password.clearError();
+          self.confirm.clearError();
+        }, 800);        
       };
     }
   });

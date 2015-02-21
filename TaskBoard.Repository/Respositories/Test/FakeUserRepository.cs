@@ -56,9 +56,9 @@ namespace TaskBoard.Repository.Respositories
                 __users.Remove(old);
                 __users.Add(model);
             }
-            else if (model._id == ObjectId.Empty)
+            else if (string.IsNullOrEmpty(model._id) || model._id == ObjectId.Empty.ToString())
             {
-                model._id = ObjectId.GenerateNewId();
+                model._id = ObjectId.GenerateNewId().ToString();
                 __users.Add(model);
             }            
         }

@@ -1,6 +1,6 @@
 ﻿(function (define, require) {
   define(
-  ['jquery', 'ko', 'svc/user'],
+  ['jquery', 'svc/user'],
   function ($, userService) {
     var service = function () {
       var self = this;
@@ -23,12 +23,12 @@
       };
       self.createProject = function (project, callback) {
         $.ajax({
-          url: 'api/projects/',
+          url: 'api/projects',
           type: 'POST',
           dataType: 'json',
           data: project,
           success: function (res) {
-            self.projects[projectId] = res;
+            self.projects[res._id] = res;
             callback(null, res);
           },
           error: function (res) {

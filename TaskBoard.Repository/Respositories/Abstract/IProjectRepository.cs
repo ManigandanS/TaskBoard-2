@@ -11,7 +11,7 @@ namespace TaskBoard.Repository.Respositories
     public interface IProjectRepository : IRepository<ProjectModel>
     {
         void AddTask(TaskModel task, string projectId);
-        List<ProjectModel> GetByOwner(string username);
+        List<ProjectModel> GetByUser(string username);
         void UpdateTask(TaskModel task);
         void RemoveTask(TaskModel model);
     }

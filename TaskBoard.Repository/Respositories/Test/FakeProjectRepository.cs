@@ -15,7 +15,7 @@ namespace TaskBoard.Repository.Respositories
 
         public void AddTask(TaskModel task, string projectId)
         {
-            ProjectModel project = __projects.Where(p => p._id == ObjectId.Parse(projectId)).First();
+            ProjectModel project = __projects.Where(p => p._id == projectId).First();
             task._id = ObjectId.GenerateNewId().ToString();
             project.Tasks.Add(task);
         }
@@ -67,6 +67,7 @@ namespace TaskBoard.Repository.Respositories
 
         public void Save(ProjectModel model)
         {
+            model._id = ObjectId.GenerateNewId().ToString();
             __projects.Add(model);
         }
 
@@ -81,9 +82,9 @@ namespace TaskBoard.Repository.Respositories
         }
 
 
-        public List<ProjectModel> GetByOwner(string username)
+        public List<ProjectModel> GetByUser(string username)
         {
-            return __projects.Where(p => p.Owner.Username == username).ToList();
+            return __projects.Where(p => p.Participants.Any(u => u.Username == username)).ToList();
         }
     }
 }

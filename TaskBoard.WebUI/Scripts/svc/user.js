@@ -8,13 +8,14 @@
           type: 'POST',
           dataType: 'json',
           data: user,
-          success: function (user) {
-            self.user = user;
-            if ('function' == typeof callback) { callback(null, self.user); }
+          success: function (res) {
+            self.user = res.user;
+            self.token = res.token;
+            callback(null, self.user);
           },
           error: function (err) {
             self.user = false;
-            if ('function' == typeof callback) { callback(err, self.user); }
+            callback(err);
           }
         });
       };
@@ -25,12 +26,13 @@
           dataType: 'json',
           data: user,
           success: function (res) {
-            self.user = res;
-            if ('function' == typeof callback) { callback(null, res); }
+            self.user = res.user;
+            self.token = res.token;
+            callback(null, self.user);
           },
           error: function (err) {
             self.user = false;
-            if ('function' == typeof callback) { callback(err, self.user); }
+            callback(err); 
           }
         });
       };

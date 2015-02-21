@@ -11,8 +11,9 @@
           if (err) {
             console.error(err);
           } else {
-            self.isAuthenticated = ko.observable(userService.isAuthenticated());
+            self.isAuthenticated(userService.isAuthenticated());
             self.app.projectList.loadProjects(function () {
+              done();
             });
           }
         });

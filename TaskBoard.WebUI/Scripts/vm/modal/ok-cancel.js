@@ -11,8 +11,8 @@
       self.viewModel.ok = function () {
         self.viewModel.pending(true);
         self.callback(function () {
-          self.pending(false);
-          $('.bs-modal-ok-cancel').hide();
+          self.viewModel.pending(false);
+          $('#okCancelModal').modal('hide');
           delete self.callback;
         });
       };
@@ -20,7 +20,7 @@
       self.show = function (message, callback) {
         self.viewModel.message(message);
         self.callback = callback;
-        $('.bs-modal-ok-cancel').show();
+        $('#okCancelModal').modal('show');
       };
     }
     return new modal();

@@ -1,13 +1,14 @@
 ﻿(function (define, require) {
   define(
-  ['ko', 'vm/modal/task-edit', 'vm/modal/ok-cancel', 'svc/project'],
-  function (ko, editTask, okCancel, projectService) {
+  ['ko', 'vm/modal/task', 'vm/modal/ok-cancel', 'svc/project'],
+  function (ko, taskModal, okCancel, projectService) {
     return function (project, column, tasks) {
       var self = this;
       self.project = project;
       self.column = column;
-      self.title = ko.observable(column.title);
+      self.title = ko.observable(column.Title);
       self.cssClass = ko.observable(column.CssClass);
+      self.allowCreate = ko.observable(column.AllowCreate);
       self.tasks = ko.observableArray(
         tasks
         .filter(function (entry) {
@@ -18,6 +19,16 @@
         }));
       self.tasks.project = project;
       self.tasks.column = column;
+      self.create = function () {
+        taskModal.show('Create new task', {
+          Title: '',
+          Description: '',
+          StartDate: '',
+          DueDate: ''
+        }, function (task, done) {
+
+        });
+      };
       self.edit = function (task) {
         editTask.show('Edit task', ko.mapping.toJS(task), function (task, done) {
           projectService.updateTask(task, function (err, task) {

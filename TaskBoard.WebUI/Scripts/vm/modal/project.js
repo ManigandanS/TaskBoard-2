@@ -17,19 +17,26 @@
         return 0 === self.viewModel.errors().length && !self.viewModel.pending();
       });
       self.viewModel.confirm = function () {
-        self.pending(true);
-        self.callback({
-          Title: self.title(),
-          Description: self.desc()
-        }, function (err, res) {
-          if (err) {
-            console.error(err);
-          } else {
-            self.pending(false);
-            $('.modal.in').hide();
-            app.projectList.push(ko.mapping.fromJS(res));
-          }
+        self.viewModel.pending(true);
+        self.project.Title = self.viewModel.title();
+        self.project.Description = self.viewModel.desc();
+        self.callback(self.project, function () {
+          self.viewModel.title('');
+          self.viewModel.title.clearErrors();
+          self.viewModel.desc('');
+          self.viewModel.pending(false);
+          $('#projectModal').modal('hide');
+          delete self.callback;
+          delete self.project;
         })
+      };
+      self.show = function (title, project, callback) {
+        self.viewModel.dialogTitle(title);
+        self.viewModel.title(project.Title);
+        self.viewModel.desc(project.Description);
+        self.project = project;
+        self.callback = callback;
+        $('#projectModal').modal('show');
       };
     }
     return new modal();

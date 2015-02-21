@@ -26,30 +26,14 @@ namespace TaskBoard.WebUI.Controllers
 
         [Route("signup")]
         [HttpPost]
-        public UserModel SignUp(UserModel user)
+        public object SignUp(UserModel user)
         {
-            var project = new ProjectModel
-            {
-                Owner = new UserModel
-                {
-                    Username = user.Username,
-                    FullName = user.FullName
-                },
-                Participants = new List<UserModel>
-                {
-                    new UserModel
-                    {
-                        Username = user.Username,
-                        FullName = user.FullName
-                    }
-                },
-                Title = "Project",
-                Description = "Description",
-                _id = ObjectId.GenerateNewId()
-            };
             _userRepository.Save(user);
-            _projectRepository.Save(project);
-            return user;
+            return new
+            {
+                user = user,
+                token = "123456789"
+            };
         }
 
         [Route("signin")]
@@ -59,7 +43,11 @@ namespace TaskBoard.WebUI.Controllers
             UserModel model = _userRepository.GetByLogin(user.Username);
             if (model.Password == user.Password)
             {
-                return Request.CreateResponse<UserModel>(model);
+                return Request.CreateResponse<object>( new
+                {
+                    user = model,
+                    token = "123456789"
+                });
             }
             return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Unauthorized");
         }
@@ -68,7 +56,7 @@ namespace TaskBoard.WebUI.Controllers
         [HttpPost]
         public void SignOut()
         {
-           
+
         }
     }
 }

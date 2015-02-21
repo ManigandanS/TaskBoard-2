@@ -20,11 +20,12 @@ namespace TaskBoard.WebUI.Controllers
             _projectRepository = projectRepository;
         }
 
+        [Route("")]
         [HttpPost]
-        public string Create(ProjectModel project)
+        public ProjectModel Create(ProjectModel project)
         {
             _projectRepository.Save(project);
-            return project._id.ToString();
+            return project;
         }
 
         [Route("{id}")]
@@ -36,9 +37,9 @@ namespace TaskBoard.WebUI.Controllers
 
         [Route("user/{username}")]
         [HttpGet]
-        public IEnumerable<ProjectModel> GetByOwner(string username)
+        public IEnumerable<ProjectModel> GetByUser(string username)
         {
-            return _projectRepository.GetByOwner(username);
+            return _projectRepository.GetByUser(username);
         }
 
         [HttpPut]
@@ -52,7 +53,7 @@ namespace TaskBoard.WebUI.Controllers
         [HttpDelete]
         public string Delete(string id)
         {
-            _projectRepository.Remove(new ProjectModel { _id = ObjectId.Parse(id) });
+            _projectRepository.Remove(new ProjectModel { _id = id });
             return id;
         }
     }

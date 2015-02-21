@@ -19,6 +19,7 @@ namespace TaskBoard.WebUI.Controllers
             _userRepository = userRepository;
         }
 
+        [Route("")]
         [HttpGet]
         public UserModel Get(string login)
         {
