@@ -1,7 +1,7 @@
 ﻿(function (define, require) {
   define(
-  ['ko', 'vm/project', 'vm/modal/project', 'svc/project', 'svc/user', 'svc/collapseable'],
-  function (ko, Project, projectModal, projectService, userService, collapseableService) {
+  ['ko', 'vm/project', 'vm/modal/project', 'vm/modal/ok-cancel', 'svc/project', 'svc/user', 'svc/collapseable'],
+  function (ko, Project, projectModal, okCancelModal, projectService, userService, collapseableService) {
     return function () {
       var self = this;
       self.visible = ko.observable(userService.isAuthenticated());
@@ -27,11 +27,21 @@
         self.projects.removeAll();
         self.visible(userService.isAuthenticated());
       };
-      self.edit = function (task) {
+      self.edit = function (project) {
 
       };
-      self.delete = function (task) {
-
+      self.delete = function (project) {
+        okCancelModal.show(
+          'Delete project ' + project.project.Title + '?',
+          ko.mapping.toJS(project),
+          function (done) {
+            projectService.deleteProject(project.project._id, function (deleteId) {
+              self.projects.remove(function (entry) {
+                entry.project._id === deleteId;
+              });
+              done();
+            })
+          });
       };
       self.create = function () {
         projectModal.show(
@@ -67,7 +77,7 @@
               if (err) {
                 console.error(err);
               } else {
-                addProject(res);
+                self.addProject(res);
                 done();
               }
             });

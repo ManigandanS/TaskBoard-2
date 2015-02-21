@@ -89,7 +89,7 @@
       self.deleteTask = function (projectId, taskId, callback) {
         $.ajax({
           url: 'api/projects/' + projectId + '/task/' + taskId,
-          type: 'POST',
+          type: 'DELETE',
           dataType: 'json',
           success: function (res) {
             var task = self.projects[projectId].Tasks.filter(function (entry) {

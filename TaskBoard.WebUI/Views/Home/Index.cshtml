@@ -16,6 +16,7 @@
   <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="~/Scripts/lib/ko.mapping.js"></script>
   <script src="~/Scripts/lib/ko.typehead.js"></script>
+  <script src="~/Scripts/lib/touch-punch.js"></script>
   <script src="~/bower_components/knockout-sortable/build/knockout-sortable.js"></script>
   <script src="~/bower_components/knockout-validation/dist/knockout.validation.js"></script>
   <script data-main="@Url.Content("~/Scripts/main.js")" src="~/bower_components/requirejs/require.js"></script>
@@ -85,6 +86,7 @@
                             <section class="panel collapse-target collapsed" data-bind="css: $parent.cssClass">
                               <header class="panel-heading">
                                 <h3 class="panel-title" data-bind="text: Title">Task title</h3>   <!-- Task title -->
+                                <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>
                                 <span class="pull-right collapse-toggle"><i class="fa fa-chevron-down"></i></span>
                               </header>
                               <div class="panel-body collapse-body">

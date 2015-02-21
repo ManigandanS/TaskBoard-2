@@ -22,7 +22,7 @@
         self.project.Description = self.viewModel.desc();
         self.callback(self.project, function () {
           self.viewModel.title('');
-          self.viewModel.title.clearErrors();
+          self.viewModel.title.clearError();
           self.viewModel.desc('');
           self.viewModel.pending(false);
           $('#projectModal').modal('hide');

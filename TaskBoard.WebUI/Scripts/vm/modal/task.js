@@ -19,22 +19,27 @@
           self.viewModel.confirm = function () {
             self.viewModel.pending(true);
 
-            self.viewModel.task.Title = self.title();
-            self.viewModel.task.Description = self.desc();
-            self.viewModel.task.DueDate = self.dueDate();
-            self.viewModel.task.StartDate = self.startDate();
+            self.task.Title = self.viewModel.title();
+            self.task.Description = self.viewModel.desc();
+            self.task.DueDate = self.viewModel.dueDate();
+            self.task.StartDate = self.viewModel.startDate();
 
             self.callback(self.task, function () {
               self.viewModel.pending(false);
               delete self.task;
               delete self.callback;
-              $('.bs-modal-task').hide();
+              $('#taskModal').modal('hide');
             });
           };
           self.show = function (title, task, callback) {
-            self.viewModel.title(title);
+            self.viewModel.dialogTitle(title);
             self.task = task;
             self.callback = callback;
+            self.viewModel.title(task.Title);
+            self.viewModel.desc(task.Description);
+            self.viewModel.dueDate(task.DueDate);
+            self.viewModel.startDate(task.StartDate);
+            $('#taskModal').modal('show');
           }
         }
         return new modal();

@@ -12,7 +12,15 @@
         args.cancelDrop = args.sourceParent.project._id !== args.targetParent.project._id;
       };
       self.afterMove = function (args) {
-        args.item.status = arg.targetParent.column.status;
+        args.item.pending(true);
+        args.item.Status(args.targetParent.column.Status);
+        projectService.updateTask(self.project._id, ko.mapping.fromJS(args.item), function (err, res) {
+          if (err) {
+            console.error(err);
+          } else {
+            args.item.pending(false);
+          }          
+        })
       };
       self.loadProjects = function (done) {
         projectService.getUsersProjects(function (err, res) {

@@ -15,7 +15,9 @@
           return self.column.Status === entry.Status;
         })
         .map(function (entry) {
-          return ko.mapping.fromJS(entry);
+          var taskVM = ko.mapping.fromJS(entry);
+          taskVM.pending = ko.observable(false)
+          return taskVM;
         }));
       self.tasks.project = project;
       self.tasks.column = column;
@@ -24,20 +26,32 @@
           Title: '',
           Description: '',
           StartDate: '',
-          DueDate: ''
+          DueDate: '',
+          Status: self.column.Status
         }, function (task, done) {
-
+          projectService.createTask(self.project._id, task, function (err, res) {
+            if (err) {
+              console.error(err);
+            } else {
+              var taskVM = ko.mapping.fromJS(res);
+              taskVM.pending = ko.observable(false);
+              self.tasks.push(taskVM);
+              done();
+            }
+          });
         });
       };
       self.edit = function (task) {
-        editTask.show('Edit task', ko.mapping.toJS(task), function (task, done) {
-          projectService.updateTask(task, function (err, task) {
+        taskModal.show('Edit task', ko.mapping.toJS(task), function (update, done) {
+          projectService.updateTask(self.project._id, update, function (err, res) {
             if (err) {
               console.error(err);
-            } else {              
+            } else {
+              var taskVM = ko.mapping.fromJS(res);
+              taskVM.pending = ko.observable(false)
               self.tasks.replace(
-                self.tasks().indexOf(ko.utils.arrayFirst(function (entry) { entry._id() === task._id; })),
-                ko.mapping.fromJS(task));
+               ko.utils.arrayFirst(self.tasks(), function (entry) { return entry._id() == res._id; }),
+               taskVM);
               done();
             }
           })
@@ -49,11 +63,11 @@
             if (err) {
               console.error(err);
             } else {
+              self.tasks.remove(task);
               done();
             }
           })
-        })
-        self.tasks.remove(task);
+        });        
       };
     }
   });

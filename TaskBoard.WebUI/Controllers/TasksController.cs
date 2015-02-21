@@ -36,11 +36,11 @@ namespace TaskBoard.WebUI.Controllers
         }
 
         [HttpDelete]
-        [Route("task")]
-        public string Delete(string projectId, TaskModel task)
+        [Route("task/{taskId}")]
+        public string Delete(string projectId, string taskId)
         {
-            _projectRepository.RemoveTask(task);
-            return task._id.ToString();
+            _projectRepository.RemoveTask(new TaskModel { _id = taskId });
+            return taskId;
         }
     }
 }
