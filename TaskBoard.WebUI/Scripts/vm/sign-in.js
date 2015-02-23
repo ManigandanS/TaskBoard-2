@@ -9,7 +9,7 @@
     password: self.password
   })
   self.enabled = ko.computed(function () {
-    return 0 === self.errors().length;
+    return !self.pending() && 0 === self.errors().length;
   });
   self.loginError = function () {
     self.pending(false);

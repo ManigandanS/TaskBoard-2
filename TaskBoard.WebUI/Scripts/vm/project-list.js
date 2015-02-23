@@ -1,11 +1,10 @@
-﻿window.ProjectList = (function (ko, Project, projectModal, okCancelModal, projectService, userService, collapseableService) {
+﻿window.ProjectList = (function (ko, Project, projectModal, okCancelModal, projectService, userService) {
   return function () {
     var self = this;
     self.visible = ko.observable(userService.isAuthenticated());
     self.projects = ko.observableArray();
     self.addProject = function (project) {
       self.projects.push(new Project(project));
-      collapseableService.update();
     };
     self.loadProjects = function (done) {
       projectService.getProjects(function (err, projects) {
@@ -82,5 +81,4 @@
       self.visible = ko.observable(userService.isAuthenticated());
     };
   };
-})(window.ko, window.Project, window.projectModal, window.okCancelModal, window.projectService, window.userService, window.collpseable);
-//})(window.define, window.require);
+})(window.ko, window.Project, window.projectModal, window.okCancelModal, window.projectService, window.userService);

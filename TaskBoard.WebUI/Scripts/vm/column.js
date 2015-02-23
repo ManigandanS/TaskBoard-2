@@ -1,4 +1,4 @@
-﻿window.Column = (function (ko, taskModal, okCancelModal, projectService) {
+﻿window.Column = (function (ko, taskModal, okCancelModal, projectService, Task) {
   return function (project, column, tasks) {
     var self = this;
     self.project = project;
@@ -12,9 +12,7 @@
         return self.column.Status === entry.Status;
       })
       .map(function (entry) {
-        var taskVM = ko.mapping.fromJS(entry);
-        taskVM.pending = ko.observable(false)
-        return taskVM;
+        return new Task(ko.mapping.fromJS(entry), true, false);
       }));
     self.tasks.project = project;
     self.tasks.column = column;
@@ -24,15 +22,13 @@
         Description: '',
         StartDate: '',
         DueDate: '',
-        Status: self.column.Statuswo
+        Status: self.column.Status
       }, function (task, done) {
         projectService.createTask(self.project._id, task, function (err, res) {
           if (err) {
             console.error(err);
           } else {
-            var taskVM = ko.mapping.fromJS(res);
-            taskVM.pending = ko.observable(false);
-            self.tasks.push(taskVM);
+            self.tasks.push(new Task(ko.mapping.fromJS(res)));
             done();
           }
         });
@@ -44,11 +40,9 @@
           if (err) {
             console.error(err);
           } else {
-            var taskVM = ko.mapping.fromJS(res);
-            taskVM.pending = ko.observable(false)
             self.tasks.replace(
-             ko.utils.arrayFirst(self.tasks(), function (entry) { return entry._id() == res._id; }),
-             taskVM);
+              ko.utils.arrayFirst(self.tasks(), function (entry) { return entry._id() == res._id; }),
+              new Task(ko.mapping.fromJS(res), task.expand()));
             done();
           }
         })
@@ -67,4 +61,4 @@
       });
     };
   }
-})(window.ko, window.taskModal, window.okCancelModal, window.projectService);
+})(window.ko, window.taskModal, window.okCancelModal, window.projectService, window.Task);
