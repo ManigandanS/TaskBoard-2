@@ -1,8 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['ko', 'jquery', 'vm/sign-in', 'vm/sign-up', 'svc/user', 'bootstrap'],
-//  function (ko, $, SignIn, SignUp, userService, bs) {
-window.userModal = new (function (ko, $, signIn, signUp, userService) {
+﻿window.userModal = new (function (ko, $, signIn, signUp, userService) {
   var self = this;
   self.viewModel = {};
   self.viewModel.signIn = signIn;
@@ -50,6 +46,3 @@ window.userModal = new (function (ko, $, signIn, signUp, userService) {
     $('#userModal').modal('show');
   };
 })(window.ko, window.jQuery, window.signIn, window.signUp, window.userService);
-//    return new modal();
-//  });
-//})(window.define, window.require);

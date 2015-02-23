@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['ko', 'vm/column', 'svc/project'],
-window.Project = (function (ko, Column, projectService) {
+﻿window.Project = (function (ko, Column, projectService) {
  return function (project) {
     var self = this;
     self.project = project;
@@ -32,4 +29,3 @@ window.Project = (function (ko, Column, projectService) {
     });
   };
 })(window.ko, window.Column, window.projectService);
-//})(window.define, window.require);

@@ -1,6 +1,4 @@
-﻿//(function (define) {
-//  define(['jquery'], function ($) {
-window.collpseable = new (function () {
+﻿window.collpseable = new (function () {
   var self = this;
   self.update = function () {
     $('.collapse-toggle').off();
@@ -22,6 +20,3 @@ window.collpseable = new (function () {
     $('.collapsed').each(update);
   }
 })(window.jQuery);
-//    return new service();
-//  });
-//})(window.define, window.require);

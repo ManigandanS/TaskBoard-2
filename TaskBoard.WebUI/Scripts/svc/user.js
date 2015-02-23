@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['jquery'],
-window.userService = new (function ($) {
+﻿window.userService = new (function ($) {
   var self = this;
   self.signIn = function (user, callback) {
     $.ajax({
@@ -81,5 +78,3 @@ window.userService = new (function ($) {
     return self.user && (self.user._id || self.user.id);
   };
 })(window.jQuery);
-//  });
-//})(window.define, window.require);

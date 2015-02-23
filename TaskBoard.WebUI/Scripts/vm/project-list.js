@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['ko', 'vm/project', 'vm/modal/project', 'vm/modal/ok-cancel', 'svc/project', 'svc/user', 'svc/collapseable'],
-window.ProjectList = (function (ko, Project, projectModal, okCancelModal, projectService, userService, collapseableService) {
+﻿window.ProjectList = (function (ko, Project, projectModal, okCancelModal, projectService, userService, collapseableService) {
   return function () {
     var self = this;
     self.visible = ko.observable(userService.isAuthenticated());

@@ -1,8 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['jquery', 'ko'],
-//  function ($, ko) {
-window.projectModal = new (function ($, ko) {
+﻿window.projectModal = new (function ($, ko) {
   var self = this;
   self.viewModel = {};
   self.viewModel.dialogTitle = ko.observable('');

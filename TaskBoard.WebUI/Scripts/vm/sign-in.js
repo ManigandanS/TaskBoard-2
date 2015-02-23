@@ -1,7 +1,4 @@
-﻿//(function (define) {
-//  define(
-//  ['ko'],
-window.signIn = new (function (ko) {
+﻿window.signIn = new (function (ko) {
   var self = this;
   self.pending = ko.observable(false);
   self.authError = ko.observable(false);
@@ -29,6 +26,3 @@ window.signIn = new (function (ko) {
     self.password.clearError();
   };
 })(window.ko);
-
-//  });
-//})(window.define);

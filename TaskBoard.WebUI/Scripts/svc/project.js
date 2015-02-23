@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['jquery', 'svc/user'],
-window.projectService = new (function ($, userService) {
+﻿window.projectService = new (function ($, userService) {
   var self = this;
   self.projects = {};
   self.getProjects = function (callback) {
@@ -104,5 +101,3 @@ window.projectService = new (function ($, userService) {
     });
   };
 })(window.jQuery, window.userService);
-//});
-//})(window.define, window.require);

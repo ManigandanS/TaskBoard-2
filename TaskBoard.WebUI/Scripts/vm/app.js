@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['ko', 'vm/user-bar', 'vm/project-list', 'vm/modal/ok-cancel', 'vm/modal/task', 'vm/modal/project', 'vm/modal/user'],
-(function ($, ko, UserBar, ProjectList, okCancelModal, taskModal, projectModal, userModal) {
+﻿(function ($, ko, UserBar, ProjectList, okCancelModal, taskModal, projectModal, userModal) {
   var app = new (function () {
     var self = this;
 

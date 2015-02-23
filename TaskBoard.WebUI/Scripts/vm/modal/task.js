@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(['jquery', 'ko'],
-//      function ($, ko) {
-window.taskModal = new (function ($, ko) {
+﻿window.taskModal = new (function ($, ko) {
   var self = this;
   self.viewModel = {};
   self.viewModel.dialogTitle = ko.observable('');
@@ -42,6 +39,3 @@ window.taskModal = new (function ($, ko) {
     $('#taskModal').modal('show');
   }
 })(window.jQuery, window.ko);
-//        return new modal();
-//      });
-//})(window.define, window.require);

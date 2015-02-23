@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['ko', 'vm/modal/user', 'svc/user'],
-window.UserBar = (function (ko, userModal, userService) {
+﻿window.UserBar = (function (ko, userModal, userService) {
    return function (app) {
     var self = this;
     self.app = app;
@@ -26,4 +23,3 @@ window.UserBar = (function (ko, userModal, userService) {
     };
   }
 })(window.ko, window.userModal, window.userService);
-//})(window.define, window.require);

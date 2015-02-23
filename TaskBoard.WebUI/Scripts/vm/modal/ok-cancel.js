@@ -1,7 +1,6 @@
 ﻿//(function (define, require) {
 //  define(
 //  ['jquery', 'ko'],
-//  function ($, ko) {
 window.okCancelModal = new (function ($, ko) {
   var self = this;
   self.viewModel = {};
@@ -22,6 +21,3 @@ window.okCancelModal = new (function ($, ko) {
     $('#okCancelModal').modal('show');
   };
 })(window.jQuery, window.ko)
-//    return new modal();
-//  });
-//})(window.define, window.require);

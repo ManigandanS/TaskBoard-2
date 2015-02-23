@@ -1,6 +1,4 @@
-﻿//(function (define, require) {
-//  define(['ko', 'svc/user', 'svc/rules'], function (ko) {
-window.signUp = new (function (ko) {
+﻿window.signUp = new (function (ko) {
   var self = this;
   self.pending = ko.observable(false);
   self.username = ko.observable('').extend({
@@ -64,6 +62,3 @@ window.signUp = new (function (ko) {
     }, 800);        
   };
 })(window.ko);
-    
-//  });
-//})(window.define, window.require);

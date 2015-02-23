@@ -1,7 +1,4 @@
-﻿//(function (define, require) {
-//  define(
-//  ['ko', 'vm/modal/task', 'vm/modal/ok-cancel', 'svc/project'],
-window.Column = (function (ko, taskModal, okCancelModal, projectService) {
+﻿window.Column = (function (ko, taskModal, okCancelModal, projectService) {
   return function (project, column, tasks) {
     var self = this;
     self.project = project;
@@ -71,4 +68,3 @@ window.Column = (function (ko, taskModal, okCancelModal, projectService) {
     };
   }
 })(window.ko, window.taskModal, window.okCancelModal, window.projectService);
-//})(window.define, window.require);

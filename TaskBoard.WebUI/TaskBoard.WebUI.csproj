@@ -664,13 +664,11 @@
     <Content Include="bower_components\requirejs\require.js" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\lib\touch-punch.js" />
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\svc\collapseable.js" />
     <Content Include="Scripts\svc\project.js" />
     <Content Include="Scripts\svc\rules.js" />
     <Content Include="Scripts\vm\modal\task.js" />
     <Content Include="Scripts\svc\user.js" />
-    <Content Include="Scripts\ko.js" />
     <Content Include="Scripts\vm\app.js" />
     <Content Include="Scripts\vm\column.js" />
     <Content Include="Scripts\vm\modal\ok-cancel.js" />
