@@ -1,5 +1,5 @@
 ﻿window.Project = (function (ko, Column, projectService) {
- return function (project) {
+ return function (project, selected) {
     var self = this;
     self.project = project;
     self.title = ko.observable(project.Title);
@@ -24,6 +24,9 @@
         done();
       });
     };
+    self.isSelected = ko.computed(function () {
+      return self === selected();
+    });
     project.Columns.forEach(function (entry) {
       self.columns.push(new Column(project, entry, self.project.Tasks));
     });

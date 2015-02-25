@@ -152,6 +152,7 @@
     </Compile>
     <Compile Include="ActionFilters\JwtAuthorizeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ISecurityService.cs" />
     <Compile Include="Services\SecurityService.cs" />
   </ItemGroup>
   <ItemGroup>

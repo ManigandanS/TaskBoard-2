@@ -1,10 +1,11 @@
 ﻿window.ProjectList = (function (ko, Project, projectModal, okCancelModal, projectService, userService) {
   return function () {
     var self = this;
+    self.selectedProject = ko.observable();
     self.visible = ko.observable(userService.isAuthenticated());
     self.projects = ko.observableArray();
     self.addProject = function (project) {
-      self.projects.push(new Project(project));
+      self.projects.push(new Project(project, selectedProject));
     };
     self.loadProjects = function (done) {
       projectService.getProjects(function (err, projects) {
@@ -24,6 +25,9 @@
       self.visible(userService.isAuthenticated());
     };
     self.edit = function (project) {
+
+    };
+    self.isSelected = function (project) {
 
     };
     self.delete = function (project) {
