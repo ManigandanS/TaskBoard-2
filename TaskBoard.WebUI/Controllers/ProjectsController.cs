@@ -7,10 +7,12 @@ using System.Net.Http;
 using System.Web.Http;
 using TaskBoard.Repository.Models;
 using TaskBoard.Repository.Respositories;
+using TaskBoard.WebUI.ActionFilters;
 
 namespace TaskBoard.WebUI.Controllers
 {
     [RoutePrefix("api/projects")]
+    [JwtAuthorize]
     public class ProjectsController : ApiController
     {
         private readonly IProjectRepository _projectRepository;

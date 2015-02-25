@@ -5,6 +5,7 @@ using Unity.WebApi;
 using System.Web.Http;
 using System.Configuration;
 using TaskBoard.Repository.Respositories;
+using TaskBoard.WebUI.Services;
 
 namespace TaskBoard.WebUI
 {
@@ -46,8 +47,11 @@ namespace TaskBoard.WebUI
         public static void RegisterWebApiTypes(IUnityContainer container)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["Taskboard"].ConnectionString;
+            var secret = ConfigurationManager.AppSettings["secret"];
+
             container.RegisterType<IProjectRepository, ProjectRepository>(new InjectionConstructor(connectionString));
             container.RegisterType<IUserRepository, UserRepository>(new InjectionConstructor(connectionString));
+            container.RegisterType<ISecurityService, SecurityService>(new InjectionConstructor(secret, new ResolvedParameter<IUserRepository>()));
         }
     }
 }

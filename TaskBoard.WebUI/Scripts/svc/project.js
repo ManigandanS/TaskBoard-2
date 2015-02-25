@@ -5,6 +5,9 @@
     $.ajax({
       url: 'api/projects/user/' + userService.user.Username,
       type: 'GET',
+      headers: {
+        Authorization: userService.token
+      },
       dataType: 'json',
       success: function (res) {
         res.forEach(function (entry) {
@@ -21,6 +24,9 @@
     $.ajax({
       url: 'api/projects',
       type: 'POST',
+      headers: {
+        Authorization: userService.token
+      },
       dataType: 'json',
       data: project,
       success: function (res) {
@@ -36,6 +42,9 @@
     $.ajax({
       url: 'api/projects/' + projectId,
       type: 'DELETE',
+      headers: {
+        Authorization: userService.token
+      },
       dataType: 'json',
       data: project,
       success: function (res) {
@@ -51,6 +60,9 @@
     $.ajax({
       url: 'api/projects/' + projectId + '/task',
       type: 'POST',
+      headers: {
+        Authorization: userService.token
+      },
       dataType: 'json',
       data: task,
       success: function (res) {
@@ -66,6 +78,9 @@
     $.ajax({
       url: 'api/projects/' + projectId + '/task',
       type: 'PUT',
+      headers: {
+        Authorization: userService.token
+      },
       dataType: 'json',
       data: task,
       success: function (res) {
@@ -86,6 +101,9 @@
     $.ajax({
       url: 'api/projects/' + projectId + '/task/' + taskId,
       type: 'DELETE',
+      headers: {
+        Authorization: userService.token
+      },
       dataType: 'json',
       success: function (res) {
         var task = self.projects[projectId].Tasks.filter(function (entry) {
