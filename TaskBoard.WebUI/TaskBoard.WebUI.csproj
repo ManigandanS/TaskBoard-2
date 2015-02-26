@@ -663,6 +663,7 @@
     <Content Include="bower_components\knockout\dist\knockout.js" />
     <Content Include="bower_components\requirejs\require.js" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\lib\knockout-bootstrap.js" />
     <Content Include="Scripts\lib\touch-punch.js" />
     <Content Include="Scripts\svc\collapseable.js" />
     <Content Include="Scripts\svc\project.js" />

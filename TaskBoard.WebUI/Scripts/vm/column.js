@@ -34,7 +34,7 @@
         });
       });
     };
-    self.edit = function (task) {
+    self.details = function (task) {
       taskModal.show('Edit task', ko.mapping.toJS(task), function (update, done) {
         projectService.updateTask(self.project._id, update, function (err, res) {
           if (err) {

@@ -1,25 +1,27 @@
 ﻿window.taskModal = new (function ($, ko) {
   var self = this;
-  self.viewModel = {};
-  self.viewModel.dialogTitle = ko.observable('');
-  self.viewModel.pending = ko.observable(false);
-  self.viewModel.title = ko.observable('').extend({ required: true });
-  self.viewModel.desc = ko.observable('');
-  self.viewModel.startDate = ko.observable('');
-  self.viewModel.dueDate = ko.observable('');
-  self.viewModel.errors = ko.validation.group({
+  var viewModel = {};
+  self.viewModel = viewModel;
+  viewModel.detailsVisivle = ko.observable(false);
+  viewModel.dialogTitle = ko.observable('');
+  viewModel.pending = ko.observable(false);
+  viewModel.title = ko.observable('').extend({ required: true });
+  viewModel.desc = ko.observable('');
+  viewModel.startDate = ko.observable('');
+  viewModel.dueDate = ko.observable('');
+  viewModel.errors = ko.validation.group({
     title: self.title
   });
-  self.viewModel.enabled = ko.computed(function () {
-    return 0 === self.viewModel.errors().length && !self.viewModel.pending();
+  viewModel.enabled = ko.computed(function () {
+    return 0 === viewModel.errors().length && !viewModel.pending();
   });
-  self.viewModel.confirm = function () {
-    self.viewModel.pending(true);
+  viewModel.confirm = function () {
+    viewModel.pending(true);
 
-    self.task.Title = self.viewModel.title();
-    self.task.Description = self.viewModel.desc();
-    self.task.DueDate = self.viewModel.dueDate();
-    self.task.StartDate = self.viewModel.startDate();
+    self.task.Title = viewModel.title();
+    self.task.Description = viewModel.desc();
+    self.task.DueDate = viewModel.dueDate();
+    self.task.StartDate = viewModel.startDate();
 
     self.callback(self.task, function () {
       self.viewModel.pending(false);
@@ -29,13 +31,13 @@
     });
   };
   self.show = function (title, task, callback) {
-    self.viewModel.dialogTitle(title);
+    viewModel.dialogTitle(title);
     self.task = task;
     self.callback = callback;
-    self.viewModel.title(task.Title);
-    self.viewModel.desc(task.Description);
-    self.viewModel.dueDate(task.DueDate);
-    self.viewModel.startDate(task.StartDate);
+    viewModel.title(task.Title);
+    viewModel.desc(task.Description);
+    viewModel.dueDate(task.DueDate);
+    viewModel.startDate(task.StartDate);
     $('#taskModal').modal('show');
   }
 })(window.jQuery, window.ko);

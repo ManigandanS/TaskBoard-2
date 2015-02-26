@@ -12,14 +12,14 @@
   <script src="~/Scripts/lib/touch-punch.js"></script>
   <script src="~/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="~/bower_components/jquery-autosize/jquery.autosize.js"></script>
-  <script src="~/bower_components/knockout/dist/knockout.js"></script>
+  <script src="~/bower_components/knockout/dist/knockout.debug.js"></script>
   <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="~/Scripts/lib/ko.mapping.js"></script>
   <script src="~/Scripts/lib/ko.typehead.js"></script>
   <script src="~/Scripts/lib/touch-punch.js"></script>
   <script src="~/bower_components/knockout-sortable/build/knockout-sortable.js"></script>
   <script src="~/bower_components/knockout-validation/dist/knockout.validation.js"></script>
-  @*<script src="~/Scripts/svc/collapseable.js"></script>*@
+  <script src="~/Scripts/lib/knockout-bootstrap.js"></script>
   <script src="~/Scripts/svc/user.js"></script>
   <script src="~/Scripts/svc/project.js"></script>
   <script src="~/Scripts/vm/modal/ok-cancel.js"></script>
@@ -36,378 +36,384 @@
   <script src="~/Scripts/vm/app.js"></script>
 </head>
 <body>
-  <div id="wrap">
-    <header>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">Taskboard</a>
-          </div>
-          <!--User Bar-->
-          <ul class="nav navbar-nav navbar-right"
-              data-bind="with: userBar">
-            <li data-bind="visible: !isAuthenticated()" style="display: none;">
-              <a role="button">
-                <span class="btn btn-success" data-bind="click: signIn">Sign In/Sign Up</span>
-              </a>
-            </li>
-            <li data-bind="visible: isAuthenticated()" style="display: none;">
-              <a role="button">
-                <span class="btn btn-default" data-bind="click: signOut">Sign Out</span>
-              </a>
-            </li>
-          </ul>
-          <!--/User Bar-->
-        </div>
-      </nav>
-    </header>
-    <!--Project List-->
-    <div class="container-fluid">
-      <div class="row" data-bind="with: projectList">
-        <article data-bind="visible: visible" style="display: none;">
-          <div class=" col-lg-12">
-            <button class="btn btn-primary btn-sm" data-bind="click: create"><i class="fa fa-plus-circle white"></i> Add Project</button>
-          </div>
-          <div class="col-lg-12">
-            <div>
-              <ul class="nav nav-tabs" data-bind="foreach: projects">
-                <li data-bind="css: { active: isSelected }">
-                  <a href="javascript:void(0);" data-bind="click: $parent.selectedProject">
-                    <span data-bind="text: title"></span>
-                  </a>
-                </li>
-              </ul>
+  <div id="#app">  
+    <div id="wrap">
+      <header>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html">Taskboard</a>
             </div>
-            <div class="tab-content" data-bind="foreach: projects">
-              <div class="tab-pane fade in" data-bind="css: { active: isSelected }">
-                <div class="well" data-bind="text: desc"></div>
-                <div class="row" data-bind="foreach: columns">
-                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <section class=" panel collapse-target collapsed" data-bind="css: cssClass">
-                      <header class="panel-heading">
-                        <h2 class="panel-title text-center" data-bind="text: title"></h2>   <!-- Column title -->
-                      </header>
-                      <div class="panel-body">
-                        <div class="well well-sm" data-bind="visible: allowCreate()">
-                          <button class="btn btn-primary btn-sm" data-bind="click: create"><i class="fa fa-plus-circle white"></i> Add Task</button>
+            <!--User Bar-->
+            <ul class="nav navbar-nav navbar-right"
+                data-bind="with: userBar">
+              <li data-bind="visible: !isAuthenticated()" style="display: none;">
+                <a role="button">
+                  <span class="btn btn-success" data-bind="click: signIn">Sign In/Sign Up</span>
+                </a>
+              </li>
+              <li data-bind="visible: isAuthenticated()" style="display: none;">
+                <a role="button">
+                  <span class="btn btn-default" data-bind="click: signOut">Sign Out</span>
+                </a>
+              </li>
+            </ul>
+            <!--/User Bar-->
+          </div>
+        </nav>
+      </header>
+      <!--Project List-->
+      <div class="container-fluid">
+        <div class="row" data-bind="with: projectList">
+          <article data-bind="visible: visible" style="display: none;">
+            <div class=" col-lg-12">
+              <button class="btn btn-primary btn-sm" data-bind="click: create"><i class="fa fa-plus-circle white"></i> Add Project</button>
+            </div>
+            <div class="col-lg-12">
+              <div>
+                <ul class="nav nav-tabs" data-bind="foreach: projects">
+                  <li data-bind="css: { active: isSelected }">
+                    <a href="javascript:void(0);" data-bind="click: $parent.selectedProject">
+                      <span data-bind="text: title"></span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content" data-bind="foreach: projects">
+                <div class="tab-pane" data-bind="css: { 'active': isSelected }">
+                  <div class="well" data-bind="text: desc"></div>
+                  <div class="row" data-bind="foreach: columns">
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                      <section class=" panel collapse-target collapsed" data-bind="css: cssClass">
+                        <header class="panel-heading">
+                          <h2 class="panel-title text-center" data-bind="text: title"></h2>   <!-- Column title -->
+                        </header>
+                        <div class="panel-body">
+                          <div class="well well-sm" data-bind="visible: allowCreate()">
+                            <button class="btn btn-primary btn-sm" data-bind="click: create"><i class="fa fa-plus-circle white"></i> Add Task</button>
+                          </div>
+                          <div class="dropzone" data-bind="sortable: { data: tasks, beforeMove: $parent.beforeMove, afterMove: $parent.afterMove }">
+                            <section class="panel" data-bind="css: $parent.cssClass">
+                              <header class="panel-heading">
+                                <div class="row">
+                                  <div class="col-xs-10">
+                                    <span class="h4 white" data-bind="text: Title"></span>   <!-- Task title -->
+                                    <i class="white fa fa-spinner fa-pulse fa-lg" data-bind="visible: pending"></i>
+                                  </div>
+                                  <div class="col-xs-2"></div>
+                                </div>
+                              </header>
+                              <a href="javascript:void(0);" class="btn-default">
+                                <div class="panel-footer" data-bind="popover: {template: 'task-popover', options:{ placement: 'bottom' } }">
+                                  View Details
+                                  <span class="pull-right"><i class="fa fa-arrow-circle-down"></i></span>
+                                </div>
+                              </a>
+                            </section>
+                          </div>
                         </div>
-                        <div class="dropzone" data-bind="sortable: { data: tasks, beforeMove: $parent.beforeMove, afterMove: $parent.afterMove }">
-                          <section class="panel" data-bind="css: $parent.cssClass">
-                            <header class="panel-heading">
-                              <div class="row">
-                                <div class="col-xs-10">
-                                  <span class="h4 white" data-bind="text: Title"></span>   <!-- Task title -->         
-                                  <i class="white fa fa-spinner fa-pulse fa-lg" data-bind="visible: pending"></i>                                 
-                                </div>       
-                                <div class="col-xs-2"></div>                           
-                              </div>
-                            </header>
-                            <a href="javascript:void(0);" class="btn-default" data-bind="click: $parent.details">
-                              <div class="panel-footer">
-                                View Details
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                              </div>
-                            </a>
-                          </section>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+    <!--/Project List-->
+    <!--Modals-->
+    <!--User Modal-->
+    <div class="modal fade"
+         id="userModal"
+         tabindex="-1"
+         role="dialog"
+         data-backdrop="static"
+         data-keyboard="false"
+         aria-labelledby="mySmallModalLabel"
+         aria-hidden="true"
+         data-bind="with: userModal">
+      <div class="modal-dialog ">
+        <div class="modal-content">
+          <br>
+          <div class="bs-example bs-example-tabs">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#signIn" data-toggle="tab">Sign In</a></li>
+              <li class=""><a href="#signUp" data-toggle="tab">Sign Up</a></li>
+            </ul>
+          </div>
+          <div class="modal-body">
+            <div id="myTabContent" class="tab-content">
+              <!--Sign In tab-->
+              <div class="tab-pane fade active in" id="signIn"
+                   data-bind="with: signIn">
+                <div class="modal-body">
+                  <form class="form-horizontal">
+                    <fieldset>
+                      <div class="form-group">
+                        <div class="controls">
+                          <input type="text"
+                                 class="form-control input-medium"
+                                 placeholder="Login or E-mail"
+                                 data-bind="textInput: login">
                         </div>
                       </div>
-                    </section>
-                  </div>
+                      <div class="form-group">
+                        <div class="controls">
+                          <input type="password"
+                                 class="form-control input-medium"
+                                 placeholder="Password"
+                                 data-bind="textInput: password" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <span class="label label-danger"
+                              data-bind="visible: authError">Combiantion of login and password not found</span>
+                        <div class="controls">
+                          <button class="btn btn-success"
+                                  type="button"
+                                  data-bind="enable: enabled, click: $parent.signInClick">
+                            <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i> Sign In
+                          </button>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
                 </div>
               </div>
+              <!--/Sign In tab-->
+              <!--Sign Up tab-->
+              <div class="tab-pane fade" id="signUp"
+                   data-bind="with: signUp">
+                <div class="modal-body">
+                  <form class="form-horizontal">
+                    <fieldset>
+                      <div class="form-group">
+                        <input class="form-control input-large"
+                               type="text"
+                               placeholder="Username"
+                               data-bind="textInput: username">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control input-large"
+                               type="text"
+                               placeholder="Email"
+                               data-bind="textInput: email">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control input-large"
+                               type="text"
+                               placeholder="Full Name"
+                               data-bind="textInput: fullname">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control input-large"
+                               type="password"
+                               placeholder="Pasword"
+                               data-bind="textInput: password">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control input-large"
+                               type="password"
+                               placeholder="Confirm password"
+                               data-bind="textInput: confirm">
+                      </div>
+                      <div class="form-group">
+                        <div class="controls">
+                          <button type="button" class="btn btn-success"
+                                  data-bind="click: $parent.signUpClick, enable: enabled">
+                            <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i> Sign Up
+                          </button>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+              <!--/Sign Up tab-->
             </div>
           </div>
-        </article>
-      </div>
-    </div>
-  </div>
-  <!--/Project List-->
-  <!--Modals-->
-  <!--User Modal-->
-  <div class="modal fade"
-       id="userModal"
-       tabindex="-1"
-       role="dialog"
-       data-backdrop="static"
-       data-keyboard="false"
-       aria-labelledby="mySmallModalLabel"
-       aria-hidden="true"
-       data-bind="with: userModal">
-    <div class="modal-dialog ">
-      <div class="modal-content">
-        <br>
-        <div class="bs-example bs-example-tabs">
-          <ul id="myTab" class="nav nav-tabs">
-            <li class="active"><a href="#signIn" data-toggle="tab">Sign In</a></li>
-            <li class=""><a href="#signUp" data-toggle="tab">Sign Up</a></li>
-          </ul>
-        </div>
-        <div class="modal-body">
-          <div id="myTabContent" class="tab-content">
-            <!--Sign In tab-->
-            <div class="tab-pane fade active in" id="signIn"
-                 data-bind="with: signIn">
-              <div class="modal-body">
-                <form class="form-horizontal">
-                  <fieldset>
-                    <div class="form-group">
-                      <div class="controls">
-                        <input type="text"
-                               class="form-control input-medium"
-                               placeholder="Login or E-mail"
-                               data-bind="textInput: login">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="controls">
-                        <input type="password"
-                               class="form-control input-medium"
-                               placeholder="Password"
-                               data-bind="textInput: password" />
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <span class="label label-danger"
-                            data-bind="visible: authError">Combiantion of login and password not found</span>
-                      <div class="controls">
-                        <button class="btn btn-success"
-                                type="button"
-                                data-bind="enable: enabled, click: $parent.signInClick">
-                          <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i> Sign In
-                        </button>
-                      </div>
-                    </div>
-                  </fieldset>
-                </form>
-              </div>
-            </div>
-            <!--/Sign In tab-->
-            <!--Sign Up tab-->
-            <div class="tab-pane fade" id="signUp"
-                 data-bind="with: signUp">
-              <div class="modal-body">
-                <form class="form-horizontal">
-                  <fieldset>
-                    <div class="form-group">
-                      <input class="form-control input-large"
-                             type="text"
-                             placeholder="Username"
-                             data-bind="textInput: username">
-                    </div>
-                    <div class="form-group">
-                      <input class="form-control input-large"
-                             type="text"
-                             placeholder="Email"
-                             data-bind="textInput: email">
-                    </div>
-                    <div class="form-group">
-                      <input class="form-control input-large"
-                             type="text"
-                             placeholder="Full Name"
-                             data-bind="textInput: fullname">
-                    </div>
-                    <div class="form-group">
-                      <input class="form-control input-large"
-                             type="password"
-                             placeholder="Pasword"
-                             data-bind="textInput: password">
-                    </div>
-                    <div class="form-group">
-                      <input class="form-control input-large"
-                             type="password"
-                             placeholder="Confirm password"
-                             data-bind="textInput: confirm">
-                    </div>
-                    <div class="form-group">
-                      <div class="controls">
-                        <button type="button" class="btn btn-success"
-                                data-bind="click: $parent.signUpClick, enable: enabled">
-                          <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i> Sign Up
-                        </button>
-                      </div>
-                    </div>
-                  </fieldset>
-                </form>
-              </div>
-            </div>
-            <!--/Sign Up tab-->
+          <div class="modal-footer">
+            <center>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </center>
           </div>
-        </div>
-        <div class="modal-footer">
-          <center>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </center>
         </div>
       </div>
     </div>
-  </div>
-  <!--/Auth Modal-->
-  <!--Create / Edit Project Modal-->
-  <div class="modal fade"
-       id="projectModal"
-       tabindex="-1"
-       role="dialog"
-       data-backdrop="static"
-       data-keyboard="false"
-       aria-labelledby="mySmallModalLabel"
-       aria-hidden="true"
-       data-bind="with: projectModal">
-    <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#signIn" data-toggle="tab">Details</a></li>
-      <li class=""><a href="#signUp" data-toggle="tab">Edit</a></li>
-    </ul>
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
+    <!--/Auth Modal-->
+    <!--Create / Edit Project Modal-->
+    <div class="modal fade"
+         id="projectModal"
+         tabindex="-1"
+         role="dialog"
+         data-backdrop="static"
+         data-keyboard="false"
+         aria-labelledby="mySmallModalLabel"
+         aria-hidden="true"
+         data-bind="with: projectModal">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#signIn" data-toggle="tab">Details</a></li>
+        <li class=""><a href="#signUp" data-toggle="tab">Edit</a></li>
+      </ul>
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
           <div class="modal-body">
-            <form class="form-horizontal">
-              <fieldset>
-                <legend data-bind="text: dialogTitle"></legend>
-                <div class="form-group">
-                  <div class="controls">
-                    <label class="control-label">Title:</label>
-                    <input type="text"
-                           class="form-control input-medium"
-                           placeholder="Title"
-                           data-bind="textInput: title">
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <fieldset>
+                  <legend data-bind="text: dialogTitle"></legend>
+                  <div class="form-group">
+                    <div class="controls">
+                      <label class="control-label">Title:</label>
+                      <input type="text"
+                             class="form-control input-medium"
+                             placeholder="Title"
+                             data-bind="textInput: title">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="controls">
-                    <label class="control-label">Description:</label>
-                    <textarea class="form-control autosize"
-                              placeholder="Description..."
-                              data-bind="textInput: desc"></textarea>
+                  <div class="form-group">
+                    <div class="controls">
+                      <label class="control-label">Description:</label>
+                      <textarea class="form-control autosize"
+                                placeholder="Description..."
+                                data-bind="textInput: desc"></textarea>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="controls">
-                    <button class="btn btn-success"
-                            data-bind="enable: enabled, click: confirm">
-                      <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Confirm
-                    </button>
+                  <div class="form-group">
+                    <div class="controls">
+                      <button class="btn btn-success"
+                              data-bind="enable: enabled, click: confirm">
+                        <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Confirm
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </fieldset>
-            </form>
+                </fieldset>
+              </form>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <center>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </center>
+          <div class="modal-footer">
+            <center>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </center>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!--/Create / Edit Project Modal-->
-  <!--Create / Edit Task Modal-->
-  <div class="modal fade"
-       id="taskModal"
-       tabindex="-1"
-       role="dialog"
-       data-backdrop="static"
-       data-keyboard="false"
-       aria-labelledby="mySmallModalLabel"
-       aria-hidden="true"
-       data-bind="with: taskModal">
-    <ul id="myTab" class="nav nav-tabs">
-      <li class="active"><a href="#signIn" data-toggle="tab">Details</a></li>
-      <li class=""><a href="#signUp" data-toggle="tab">Edit</a></li>
-    </ul>
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
+    <!--/Create / Edit Project Modal-->
+    <!--Create / Edit Task Modal-->
+    <div class="modal fade"
+         id="taskModal"
+         tabindex="-1"
+         role="dialog"
+         data-backdrop="static"
+         data-keyboard="false"
+         aria-labelledby="mySmallModalLabel"
+         aria-hidden="true"
+         data-bind="with: taskModal">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#signIn" data-toggle="tab">Details</a></li>
+        <li class=""><a href="#signUp" data-toggle="tab">Edit</a></li>
+      </ul>
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
           <div class="modal-body">
-            <form class="form-horizontal">
-              <fieldset>
-                <legend data-bind="text: dialogTitle"></legend>
-                <div class="form-group">
-                  <div class="controls">
-                    <label class="control-label">Title:</label>
-                    <input type="text"
-                           class="form-control input-medium"
-                           placeholder="Title"
-                           data-bind="textInput: title">
+            <div class="modal-body">
+              <form class="form-horizontal">
+                <fieldset>
+                  <legend data-bind="text: dialogTitle"></legend>
+                  <div class="form-group">
+                    <div class="controls">
+                      <label class="control-label">Title:</label>
+                      <input type="text"
+                             class="form-control input-medium"
+                             placeholder="Title"
+                             data-bind="textInput: title">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="controls">
-                    <label class="control-label">Description:</label>
-                    <textarea class="form-control autosize"
-                              placeholder="Description..."
-                              data-bind="textInput: desc"></textarea>
+                  <div class="form-group">
+                    <div class="controls">
+                      <label class="control-label">Description:</label>
+                      <textarea class="form-control autosize"
+                                placeholder="Description..."
+                                data-bind="textInput: desc"></textarea>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="controls">
-                    <label class="control-label">Start Date:</label>
-                    <input type="text"
-                           class="form-control input-medium datepicker"
-                           placeholder="Title"
-                           data-bind="textInput: startDate">
+                  <div class="form-group">
+                    <div class="controls">
+                      <label class="control-label">Start Date:</label>
+                      <input type="text"
+                             class="form-control input-medium datepicker"
+                             placeholder="Title"
+                             data-bind="textInput: startDate">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="controls">
-                    <label class="control-label">Due Date:</label>
-                    <input type="text"
-                           class="form-control input-medium datepicker"
-                           placeholder="Title"
-                           data-bind="textInput: dueDate">
+                  <div class="form-group">
+                    <div class="controls">
+                      <label class="control-label">Due Date:</label>
+                      <input type="text"
+                             class="form-control input-medium datepicker"
+                             placeholder="Title"
+                             data-bind="textInput: dueDate">
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <div class="controls">
-                    <button class="btn btn-success"
-                            data-bind="enable: enabled, click: confirm">
-                      <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Confirm
-                    </button>
+                  <div class="form-group">
+                    <div class="controls">
+                      <button class="btn btn-success"
+                              data-bind="enable: enabled, click: confirm">
+                        <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Confirm
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </fieldset>
-            </form>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <center>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </center>
           </div>
         </div>
-        <div class="modal-footer">
-          <center>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </center>
+      </div>
+    </div>
+    <!--/Create / Edit Task Modal-->
+    <!--OK /Cancel-->
+    <div class="modal fade"
+         id="okCancelModal"
+         tabindex="-1"
+         role="dialog"
+         data-backdrop="static"
+         data-keyboard="false"
+         aria-labelledby="mySmallModalLabel"
+         aria-hidden="true"
+         data-bind="with: okCancelModal">
+      <div class="modal-dialog modal-sm modal-vertical-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <span class="h4" data-bind="text: message"></span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bind="click: ok, disable: pending"><i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Ok</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
         </div>
       </div>
     </div>
+    <!--/OK /Cancel-->
+    <!--/Modals-->
   </div>
-  <!--/Create / Edit Task Modal-->
-  <!--OK /Cancel-->
-  <div class="modal fade"
-       id="okCancelModal"
-       tabindex="-1"
-       role="dialog"
-       data-backdrop="static"
-       data-keyboard="false"
-       aria-labelledby="mySmallModalLabel"
-       aria-hidden="true"
-       data-bind="with: okCancelModal">
-    <div class="modal-dialog modal-sm modal-vertical-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          <span class="h4" data-bind="text: message"></span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bind="click: ok, disable: pending"><i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Ok</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/OK /Cancel-->
-  <!--/Modals-->
+  <script type="text/html" id="task-popover">
+    <button class="close pull-right" type="button" data-dismiss="popover">×</button>
+    <span data-bind="text: Title"></span>
+  </script>
 </body>
 
 </html>

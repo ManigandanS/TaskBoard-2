@@ -1,6 +1,9 @@
 ﻿window.Task = (function (ko) {
   return function (task, expanded, pending) {
     var self = this;
+    self.getTask = function () {
+      return ko.mapping.toJS(task);
+    }
     self.expanded = ko.observable(expanded || true);
     self.pending = ko.observable(pending || false);
     self.toggleCollapse = function () {

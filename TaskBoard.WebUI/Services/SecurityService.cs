@@ -32,6 +32,7 @@ namespace TaskBoard.WebUI.Services
                 UserModel user = _userRepository.GetByLogin(principal.Identity.Name);
                 if (null != user)
                 {
+                    // refresh principal
                     CurrentUser = user;
                     HttpContext.Current.User = principal;
                     return true;
