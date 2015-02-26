@@ -15,12 +15,6 @@
     color: white;
 }  
 
-.pending {
-    color: white;
-}
-
-.modal-vertical-centered {
-  transform: translate(0, 50%) !important;
-  -ms-transform: translate(0, 50%) !important; /* IE 9 */
-  -webkit-transform: translate(0, 50%) !important; /* Safari and Chrome */
+.white {
+    color: #fff;
 }

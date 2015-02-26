@@ -44,7 +44,7 @@ namespace TaskBoard.WebUI.Services
         public string SignIn(string username, string password)
         {
             UserModel model = _userRepository.GetByLogin(username);
-            if (password == model.Password)
+            if ((null != model) && (password == model.Password))
             {
                 CurrentUser = model;
                 ClaimsPrincipal principal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>

@@ -5,7 +5,7 @@
     self.visible = ko.observable(userService.isAuthenticated());
     self.projects = ko.observableArray();
     self.addProject = function (project) {
-      self.projects.push(new Project(project, selectedProject));
+      self.projects.push(new Project(project, self.selectedProject));
     };
     self.loadProjects = function (done) {
       projectService.getProjects(function (err, projects) {
@@ -16,6 +16,9 @@
             self.addProject(entry);
           });
           self.visible(userService.isAuthenticated());
+          if (self.projects()[0]) {
+            self.selectedProject(self.projects()[0]);
+          }
           done();
         }
       })
