@@ -176,6 +176,7 @@
     <Content Include="bower_components\bootstrap\js\tab.js" />
     <Content Include="bower_components\bootstrap\js\tooltip.js" />
     <Content Include="bower_components\bootstrap\js\transition.js" />
+    <Content Include="bower_components\bootstrap\js\typeahead.js" />
     <Content Include="bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
     <Content Include="bower_components\jquery-autosize\jquery.autosize.js" />

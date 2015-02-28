@@ -40,7 +40,7 @@ namespace TaskBoard.WebUI.Controllers
         [HttpGet]
         public IEnumerable<UserModel> Search(string query)
         {
-            return _userRepository.Find(query);
+            return (string.IsNullOrEmpty(query)) ? new List<UserModel>() : _userRepository.Find(query);
         }
     }
 }

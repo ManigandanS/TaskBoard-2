@@ -74,6 +74,22 @@
       }
     });
   };
+  self.search = function (query, callback) {
+    $.ajax({
+      url: '/api/users/search',
+      type: 'GET',
+      data: {
+        query: query
+      },
+      dataType: 'json',
+      success: function (res) {
+        callback(null, res);
+      },
+      error: function (err) {
+        callback(err);
+      }
+    });
+  };
   self.isAuthenticated = function () {
     return self.user && (self.user._id || self.user.id);
   };

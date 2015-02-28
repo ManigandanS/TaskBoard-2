@@ -15,11 +15,11 @@
   <script src="~/bower_components/knockout/dist/knockout.debug.js"></script>
   <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="~/Scripts/lib/ko.mapping.js"></script>
-  <script src="~/Scripts/lib/ko.typehead.js"></script>
   <script src="~/Scripts/lib/touch-punch.js"></script>
   <script src="~/bower_components/knockout-sortable/build/knockout-sortable.js"></script>
   <script src="~/bower_components/knockout-validation/dist/knockout.validation.js"></script>
   <script src="~/Scripts/lib/knockout-bootstrap.js"></script>
+  <script src="~/bower_components/bootstrap/js/typeahead.js"></script>
   <script src="~/Scripts/svc/user.js"></script>
   <script src="~/Scripts/svc/project.js"></script>
   <script src="~/Scripts/vm/modal/ok-cancel.js"></script>
@@ -87,7 +87,7 @@
               </div>
               <div class="tab-content" data-bind="foreach: projects">
                 <div class="tab-pane" data-bind="css: { 'active': isSelected }">
-                  <button class="close pull-right" type="button" data-bind="vivible: canEdit, popover: { template: 'ok-cancel-popover', options:{ title: 'Delete Project?', placement: 'left' }, data: getDeleteData }">×</button>
+                  <button class="close pull-right" type="button" data-bind="visible: canEdit, popover: { template: 'ok-cancel-popover', options:{ title: 'Delete Project?', placement: 'left' }, data: getDeleteData }">×</button>
                   <div class="well" data-bind="text: desc"></div>
                   <div class="row" data-bind="foreach: columns">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -281,18 +281,19 @@
                   <div class="form-group">
                     <div class="controls">
                       <label class="control-label">Participants:</label>
-                      <span class="label label-success" data-bind="foreach: participants">
-                        <span data-bind="text: name"></span>
-                        <a href="javascript:void(0);" data-bind="visible: $parent.canRemove, click: $parent.removeUser"><i class="fa fa-minus-circle white"></i></a>
+                      <span data-bind="foreach: participants">
+                        <span class="label label-success">
+                          <span data-bind="text: name"></span>
+                          <a href="javascript:void(0);" data-bind="visible: canRemove, click: $parent.removeUser"><i class="fa fa-minus-circle white"></i></a>
+                        </span>
                       </span>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="controls">
-                      <input type="text"
+                      <input type="text" id="usersTypeahead"
                              class="form-control input-medium"
-                             placeholder="Add user"
-                             data-bind="typeahead: {source: users(), minLength: 2, delay: 250}" />                      
+                             placeholder="Add user" />                      
                     </div>
                   </div>
                   <div class="form-group">
@@ -367,12 +368,12 @@
                   </div>
                   <div class="form-group">
                     <label class="control-label">Assigned To:</label>
-                    <span class="label label-success" data-bind="foreach: assignedTo"><span data-bind="text: FullName, click: $parent.removeUser"></span></span>
+                    <span data-bind="foreach: assignedTo"><span class="label label-success" data-bind="text: FullName, click: $parent.removeUser"></span></span>
                   </div>
                   <div class="form-group">
                     <label class="control-label">Assign User:</label>
-                    <span class="label label-success" data-bind="foreach: availableUsers"><span data-bind="text: FullName, click: $parent.addUser"></span></span>
-                  </div>  
+                    <span data-bind="foreach: availableUsers"><span class="label label-success" data-bind="text: FullName, click: $parent.addUser"></span></span>
+                  </div> 
                   <div class="form-group">
                     <div class="controls">
                       <button class="btn btn-success"
@@ -448,7 +449,7 @@
             <tr>
               <td>
                 <label>Assigned to:</label>
-                <label class="label lable-default" data-bind="foreach: AssignedTo"><span data-bind="text: FullName"></span></label>
+                <label data-bind="foreach: AssignedTo"><span class="label label-success" data-bind="text: FullName"></span></label>
               </td>
             </tr>
           </table>

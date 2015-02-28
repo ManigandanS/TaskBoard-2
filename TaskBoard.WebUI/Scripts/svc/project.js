@@ -66,7 +66,6 @@
         Authorization: userService.token
       },
       dataType: 'json',
-      data: project,
       success: function (res) {
         delete self.projects[res];
         callback(null, res);

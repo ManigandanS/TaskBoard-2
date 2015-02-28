@@ -1,5 +1,5 @@
 ﻿window.Project = (function (ko, Column, projectService, userService) {
-  return function (project, selected) {
+  return function (project, selected, remove) {
     var self = this;
     self.project = project;
     self.title = ko.observable(project.Title);
@@ -12,13 +12,13 @@
       $self.pending = ko.observable(false),
       $self.confirm = function () {
         $self.pending(true);
-        projectService.deleteTask(self.column.project._id, self._id(), function (err) {
+        projectService.deleteProject(self.project._id, function (err) {
           if (err) {
             console.error(err);
           } else {
             $self.pending(false);
             $self.$hidePopover();
-            column.tasks.remove(self);
+            remove(self);
           }
         });
       }
@@ -29,7 +29,7 @@
     self.afterMove = function (args) {
       args.item.pending(true);
       args.item.Status(args.targetParent.column.Status);
-      projectService.updateTask(self.project._id, ko.mapping.fromJS(args.item), function (err, res) {
+      projectService.updateTask(self.project._id, ko.mapping.toJS(args.item), function (err, res) {
         if (err) {
           console.error(err);
         } else {

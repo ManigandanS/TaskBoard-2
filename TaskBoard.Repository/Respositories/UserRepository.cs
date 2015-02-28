@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace TaskBoard.Repository.Respositories
         public List<UserModel> Find(string query)
         {
             return Collection.Find(
-                Query<UserModel>.Matches(u => u.FullName, query))
+                Query<UserModel>.Matches(u => u.FullName, new BsonRegularExpression(query, "i")))
                 .SetFields(Fields<UserModel>.Include(u => u.Username, u => u.FullName))
                 .ToList();
         }

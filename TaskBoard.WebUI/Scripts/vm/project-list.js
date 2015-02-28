@@ -4,8 +4,11 @@
     self.selectedProject = ko.observable();
     self.visible = ko.observable(userService.isAuthenticated());
     self.projects = ko.observableArray();
+    self.removeProject = function(project) {
+      self.projects.remove(project);
+    };
     self.addProject = function (project) {
-      self.projects.push(new Project(project, self.selectedProject));
+      self.projects.push(new Project(project, self.selectedProject, self.removeProject));
     };
     self.loadProjects = function (done) {
       projectService.getProjects(function (err, projects) {

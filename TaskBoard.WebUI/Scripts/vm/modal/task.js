@@ -42,14 +42,21 @@
     viewModel.startDate((null !== task.StartDate) ? new Date(Date.parse(task.StartDate)) : new Date());
     viewModel.dueDate((null !== task.DueDate) ? new Date(Date.parse(task.DueDate)) : new Date());
     viewModel.assignedTo(task.AssignedTo || []);
-    viewModel.availableUsers([]
-        (self.project.Participants || [])
+    viewModel.availableUsers((self.project.Participants || [])
           .filter(function (entry) {
-            return -1 === self.assignedTo().map(function () {
+            return -1 === viewModel.assignedTo().map(function () {
               return entry.Username
             })
             .indexOf(entry.Username)
           }));
+    viewModel.addUser = function (item) {
+      viewModel.availableUsers.remove(item);
+      viewModel.assignedTo.push(item);
+    };
+    viewModel.removeUser = function (item) {
+      viewModel.assignedTo.remove(item);
+      viewModel.availableUsers.push(item);
+    };
     $('#taskModal').modal('show');
   }
 })(window.jQuery, window.ko);

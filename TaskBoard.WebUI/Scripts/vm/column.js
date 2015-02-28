@@ -20,11 +20,14 @@
       taskModal.show('Create new task', {
         Title: '',
         Description: '',
-        StartDate: '',
-        DueDate: '',
+        StartDate: new Date(),
+        DueDate: new Date(),
         Source: { Username: userService.user.Username, Username: userService.user.FullName },
+        AssignedTo: [],
         Status: self.column.Status
-      }, function (task, done) {
+      },
+      project,
+      function (task, done) {
         projectService.createTask(self.project._id, task, function (err, res) {
           if (err) {
             console.error(err);
@@ -60,6 +63,6 @@
           }
         })
       });
-    };
+    };    
   }
 })(window.ko, window.taskModal, window.okCancelModal, window.projectService, window.userService, window.Task);
