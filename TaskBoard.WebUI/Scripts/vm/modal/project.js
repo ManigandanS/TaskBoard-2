@@ -16,6 +16,7 @@
     self.viewModel.pending(true);
     self.project.Title = self.viewModel.title();
     self.project.Description = self.viewModel.desc();
+    self.project.Participants = self.viewModel.participants();
     self.callback(self.project, function () {
       self.viewModel.title('');
       self.viewModel.title.clearError();
@@ -26,8 +27,41 @@
       delete self.project;
     })
   };
-  self.viewModel.addUser = function (user) {
 
+  var User = function (user) {
+    var self = this;
+    self.user = user;
+    self.name = ko.observable(user.FullName);
+    self.canRemove = ko.observable(userService.user.Username !== user.Username);
+  }
+
+  self.viewModel.users = ko.observableArray([
+    {
+      Username: 'alice',
+      FullName: 'Alice'
+    },
+    {
+      Username: 'bob',
+      FullName: 'Bob'
+    },
+    {
+      Username: 'john',
+      FullName: 'John'
+    },
+    {
+      Username: 'dave',
+      FullName: 'Dave'
+    }
+  ]);
+  self.viewModel.newUser = ko.observable();
+  self.viewModel.addUser = function () {
+    self.viewModel.participants.push(new User(user));
+  };
+  self.viewModel.removeUser = function (user) {
+    self.viewModel.participants.remove(user);
+  };
+  self.viewModel.getUsers = function (query, callback) {
+    callback(self.users.filter(function (user) { return -1 === self.viewModel.participants.map(function (participant) { return participant.Username }).indexOf(user.Username); }));
   };
   self.viewModel.searchUsers = function (q, callback) {
     userService.searchUsers(q, function (res) {
@@ -38,6 +72,7 @@
     self.viewModel.dialogTitle(title);
     self.viewModel.title(project.Title);
     self.viewModel.desc(project.Description);
+    self.viewModel.participants(project.Participants.map(function(entry) { return new User(entry); }));
     self.project = project;
     self.callback = callback;
     $('#projectModal').modal('show');
