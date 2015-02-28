@@ -1,4 +1,4 @@
-﻿window.projectModal = new (function ($, ko) {
+﻿window.projectModal = new (function ($, ko, userService) {
   var self = this;
   self.viewModel = {};
   self.viewModel.dialogTitle = ko.observable('');
@@ -26,6 +26,14 @@
       delete self.project;
     })
   };
+  self.viewModel.addUser = function (user) {
+
+  };
+  self.viewModel.searchUsers = function (q, callback) {
+    userService.searchUsers(q, function (res) {
+      callback(res);
+    });
+  };
   self.show = function (title, project, callback) {
     self.viewModel.dialogTitle(title);
     self.viewModel.title(project.Title);
@@ -34,4 +42,4 @@
     self.callback = callback;
     $('#projectModal').modal('show');
   };
-})(window.jQuery, window.ko);
+})(window.jQuery, window.ko, window.userService);

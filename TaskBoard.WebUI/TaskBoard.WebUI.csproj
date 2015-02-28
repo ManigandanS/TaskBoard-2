@@ -679,6 +679,7 @@
     <Content Include="Scripts\vm\sign-in.js" />
     <Content Include="Scripts\vm\sign-up.js" />
     <Content Include="Scripts\vm\modal\user.js" />
+    <Content Include="Scripts\vm\task-popover.js" />
     <Content Include="Scripts\vm\task.js" />
     <Content Include="Scripts\vm\user-bar.js" />
     <Content Include="Styles\cosmo.css" />

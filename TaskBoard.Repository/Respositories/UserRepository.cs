@@ -36,11 +36,9 @@ namespace TaskBoard.Repository.Respositories
         public List<UserModel> Find(string query)
         {
             return Collection.Find(
-                Query.Or(
-                Query<UserModel>.Matches(u => u.Username, query),
-                Query<UserModel>.Matches(u => u.Email, query),
-                Query<UserModel>.Matches(u => u.FullName, query)
-                )).ToList();
+                Query<UserModel>.Matches(u => u.FullName, query))
+                .SetFields(Fields<UserModel>.Include(u => u.Username, u => u.FullName))
+                .ToList();
         }
     }
 }

@@ -38,6 +38,26 @@
       }
     });
   };
+  self.updateProject = function (project, callback) {
+    $.ajax({
+      url: 'api/projects',
+      type: 'PUT',
+      headers: {
+        Authorization: userService.token
+      },
+      dataType: 'json',
+      data: project,
+      success: function (res) {
+        for (var prop in res) {
+          self.projects[res._id][prop] = res[prop] || self.projects[res._id][prop];
+        }
+        callback(null, self.projects[res._id]);
+      },
+      error: function (res) {
+        callback(res);
+      }
+    });
+  };
   self.deleteProject = function (projectId, callback) {
     $.ajax({
       url: 'api/projects/' + projectId,

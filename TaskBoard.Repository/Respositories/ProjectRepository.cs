@@ -24,6 +24,16 @@ namespace TaskBoard.Repository.Respositories
                 Update<ProjectModel>.AddToSet(p => p.Tasks, task));
         }
 
+        public void UpdateProject(ProjectModel project)
+        {
+            Collection.Update(
+                Query<ProjectModel>.EQ(p => p._id, project._id),
+                Update<ProjectModel>
+                    .Set(p => p.Title, project.Title)
+                    .Set(p => p.Description, project.Description)
+                    .Set(p => p.Participants, project.Participants));
+        }
+
         public void UpdateTask(TaskModel task)
         {
             Collection.Update(

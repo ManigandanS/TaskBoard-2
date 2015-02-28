@@ -29,49 +29,57 @@ function setupKoBootstrap(koObject, $) {
     };
   }
 
+  koObject.bindingHandlers.datepicker = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+      //initialize datepicker with some optional options
+      var options = allBindingsAccessor().datepickerOptions || {};
+      $(element).datepicker(options);
+
+      //when a user changes the date, update the view model
+      ko.utils.registerEventHandler(element, "changeDate", function (event) {
+        var value = valueAccessor();
+        if (ko.isObservable(value)) {
+          value(event.date);
+        }
+      });
+    },
+    update: function (element, valueAccessor) {
+      $(element).datepicker('setDate', ko.utils.unwrapObservable(valueAccessor()));
+      //when the view model is updated, update the widget
+      //if (widget) {
+      //  widget.date = ko.utils.unwrapObservable(valueAccessor());
+      //  if (widget.date) {
+      //    widget.setDate(widget.date);
+      //  }
+      //}
+    }
+  }
+
+  koObject.bindingHandlers.autosize = {
+    init: function (element) {
+      $(element).autosize();
+    }
+  }
+
   // Bind twitter typeahead
   koObject.bindingHandlers.typeahead = {
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-      var $element = $(element);
+    init: function (element, valueAccessor, allBindingsAccessor, context) {
+      var options = valueAccessor() || {};
       var allBindings = allBindingsAccessor();
-      var substringMatcher = function (strs) {
-        return function findMatches(q, cb) {
-          var matches, substrRegex;
-
-          // an array that will be populated with substring matches
-          matches = [];
-
-          // regex used to determine if a string contains the substring `q`
-          substrRegex = new RegExp(q, 'i');
-
-          // iterate through the pool of strings and for any string that
-          // contains the substring `q`, add it to the `matches` array
-          $.each(strs, function (i, str) {
-            if (substrRegex.test(str)) {
-              // the typeahead jQuery plugin expects suggestions to a
-              // JavaScript object, refer to typeahead docs for more info
-              matches.push({ value: str });
-            }
-          });
-
-          cb(matches);
+      // update the "value" binding on select
+      var modelValue = allBindings.value;
+      if (modelValue) {
+        var handleValueChange = function (item) {
+          var valueToWrite = item ? item : $(element).val();
+          if (ko.isWriteableObservable(modelValue)) {
+            modelValue(valueToWrite);
+          }
+          return item;
         };
-      };
-      var typeaheadOpts = {
-        source: substringMatcher(koObject.utils.unwrapObservable(valueAccessor()))
-      };
-
-      if (allBindings.typeaheadOptions) {
-        $.each(allBindings.typeaheadOptions, function (optionName, optionValue) {
-          typeaheadOpts[optionName] = koObject.utils.unwrapObservable(optionValue);
-        });
+        options.updater = handleValueChange;
       }
-
-      $element.attr("autocomplete", "off").typeahead({
-        hint: true,
-        highlight: true,
-        minLength: 1
-      }, typeaheadOpts);
+      // call bootstrap type ahead
+      $(element).typeahead(options);
     }
   };
 
@@ -181,11 +189,17 @@ function setupKoBootstrap(koObject, $) {
           y: button.outerHeight()
         };
 
+        var hide = function () {
+          button.popover('hide');
+        };
+
         ko.cleanNode(popoverEl[0]);
         if (data) {
+          data.$hidePopover = hide;
           koObject.applyBindings({ template: template, data: data }, popoverEl[0]);
         }
         else {
+          viewModel.$hidePopover = hide;
           koObject.applyBindings(viewModel, popoverEl[0]);
         }
 

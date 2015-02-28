@@ -1,4 +1,4 @@
-﻿window.Column = (function (ko, taskModal, okCancelModal, projectService, Task) {
+﻿window.Column = (function (ko, taskModal, okCancelModal, projectService, userService, Task) {
   return function (project, column, tasks) {
     var self = this;
     self.project = project;
@@ -12,7 +12,7 @@
         return self.column.Status === entry.Status;
       })
       .map(function (entry) {
-        return new Task(ko.mapping.fromJS(entry), true, false);
+        return new Task(ko.mapping.fromJS(entry), self);
       }));
     self.tasks.project = project;
     self.tasks.column = column;
@@ -22,13 +22,14 @@
         Description: '',
         StartDate: '',
         DueDate: '',
+        Source: { Username: userService.user.Username, Username: userService.user.FullName },
         Status: self.column.Status
       }, function (task, done) {
         projectService.createTask(self.project._id, task, function (err, res) {
           if (err) {
             console.error(err);
           } else {
-            self.tasks.push(new Task(ko.mapping.fromJS(res)));
+            self.tasks.push(new Task(ko.mapping.fromJS(res), self));
             done();
           }
         });
@@ -42,7 +43,7 @@
           } else {
             self.tasks.replace(
               ko.utils.arrayFirst(self.tasks(), function (entry) { return entry._id() == res._id; }),
-              new Task(ko.mapping.fromJS(res), task.expand()));
+              new Task(ko.mapping.fromJS(res), self));
             done();
           }
         })
@@ -61,4 +62,4 @@
       });
     };
   }
-})(window.ko, window.taskModal, window.okCancelModal, window.projectService, window.Task);
+})(window.ko, window.taskModal, window.okCancelModal, window.projectService, window.userService, window.Task);

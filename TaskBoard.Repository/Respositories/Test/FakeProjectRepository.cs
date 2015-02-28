@@ -28,6 +28,8 @@ namespace TaskBoard.Repository.Respositories
             project.Tasks.Add(task);
         }
 
+        public void UpdateProject(ProjectModel project) { }
+
         public void RemoveTask(string projectId, string taskId)
         {
             //ProjectModel project = __projects.Where(p => p.Tasks.Any(t => t._id == model._id)).First();

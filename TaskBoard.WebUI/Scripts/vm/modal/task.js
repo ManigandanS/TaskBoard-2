@@ -2,13 +2,22 @@
   var self = this;
   var viewModel = {};
   self.viewModel = viewModel;
-  viewModel.detailsVisivle = ko.observable(false);
+  viewModel.detailsVisible = ko.observable(false);
   viewModel.dialogTitle = ko.observable('');
   viewModel.pending = ko.observable(false);
   viewModel.title = ko.observable('').extend({ required: true });
   viewModel.desc = ko.observable('');
-  viewModel.startDate = ko.observable('');
-  viewModel.dueDate = ko.observable('');
+  viewModel.startDate = ko.observable((null !== task.StartDate) ? new Date(Date.parse(task.StartDate)) : new Date());
+  viewModel.dueDate = ko.observable((null !== task.DueDate) ? new Date(Date.parse(task.DueDate)) : new Date());
+  viewModel.assignedTo = ko.observableArray(task.AssignedTo || []);
+  viewModel.availableUsers = ko.observableArray(
+        (self.column.project.Participants || [])
+          .filter(function (entry) {
+            return -1 === $self.assignedTo().map(function () {
+              return entry.Username
+            })
+            .indexOf(entry.Username)
+          }));
   viewModel.errors = ko.validation.group({
     title: self.title
   });

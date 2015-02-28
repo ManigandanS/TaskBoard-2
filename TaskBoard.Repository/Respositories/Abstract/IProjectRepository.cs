@@ -13,6 +13,7 @@ namespace TaskBoard.Repository.Respositories
         void AddTask(TaskModel task, string projectId);
         List<ProjectModel> GetByUser(string username);
         void UpdateTask(TaskModel task);
+        void UpdateProject(ProjectModel project);
         void RemoveTask(string projectId, string taskId);
     }
 }

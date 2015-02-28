@@ -1,10 +1,28 @@
-﻿window.Project = (function (ko, Column, projectService) {
- return function (project, selected) {
+﻿window.Project = (function (ko, Column, projectService, userService) {
+  return function (project, selected) {
     var self = this;
     self.project = project;
     self.title = ko.observable(project.Title);
     self.desc = ko.observable(project.Description);
     self.columns = ko.observableArray();
+    self.canEdit = ko.observable(self.project.Owner.Username === userService.user.Username);
+    self.getDeleteData = new (function () {
+      var $self = this;
+      $self.message = ko.observable('Delete project: ' + self.title() + '?'),
+      $self.pending = ko.observable(false),
+      $self.confirm = function () {
+        $self.pending(true);
+        projectService.deleteTask(self.column.project._id, self._id(), function (err) {
+          if (err) {
+            console.error(err);
+          } else {
+            $self.pending(false);
+            $self.$hidePopover();
+            column.tasks.remove(self);
+          }
+        });
+      }
+    })();
     self.beforeMove = function (args) {
       args.cancelDrop = args.sourceParent.project._id !== args.targetParent.project._id;
     };
@@ -31,4 +49,4 @@
       self.columns.push(new Column(project, entry, self.project.Tasks));
     });
   };
-})(window.ko, window.Column, window.projectService);
+})(window.ko, window.Column, window.projectService, window.userService);

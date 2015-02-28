@@ -36,7 +36,7 @@
   <script src="~/Scripts/vm/app.js"></script>
 </head>
 <body>
-  <div id="#app">  
+  <div id="#app">
     <div id="wrap">
       <header>
         <nav class="navbar navbar-default">
@@ -87,6 +87,7 @@
               </div>
               <div class="tab-content" data-bind="foreach: projects">
                 <div class="tab-pane" data-bind="css: { 'active': isSelected }">
+                  <button class="close pull-right" type="button" data-bind="vivible: canEdit, popover: { template: 'ok-cancel-popover', options:{ title: 'Delete Project?', placement: 'left' }, data: getDeleteData }">×</button>
                   <div class="well" data-bind="text: desc"></div>
                   <div class="row" data-bind="foreach: columns">
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -101,16 +102,12 @@
                           <div class="dropzone" data-bind="sortable: { data: tasks, beforeMove: $parent.beforeMove, afterMove: $parent.afterMove }">
                             <section class="panel" data-bind="css: $parent.cssClass">
                               <header class="panel-heading">
-                                <div class="row">
-                                  <div class="col-xs-10">
-                                    <span class="h4 white" data-bind="text: Title"></span>   <!-- Task title -->
-                                    <i class="white fa fa-spinner fa-pulse fa-lg" data-bind="visible: pending"></i>
-                                  </div>
-                                  <div class="col-xs-2"></div>
-                                </div>
+                                <span class="h4 white" data-bind="text: Title"></span>   <!-- Task title -->
+                                <i class="white fa fa-spinner fa-pulse fa-lg" data-bind="visible: pending"></i>
+                                <button class="close pull-right white" type="button" data-bind="popover: { template: 'ok-cancel-popover', title: 'Delete task?', options:{ placement: 'left' }, data: getDeleteData }">×</button>
                               </header>
                               <a href="javascript:void(0);" class="btn-default">
-                                <div class="panel-footer" data-bind="popover: {template: 'task-popover', options:{ placement: 'bottom' } }">
+                                <div class="panel-footer" data-bind="popover: {template: 'task-popover', options:{ placement: 'bottom' }, data: getDetailsData }">
                                   View Details
                                   <span class="pull-right"><i class="fa fa-arrow-circle-down"></i></span>
                                 </div>
@@ -318,17 +315,13 @@
          aria-labelledby="mySmallModalLabel"
          aria-hidden="true"
          data-bind="with: taskModal">
-      <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#signIn" data-toggle="tab">Details</a></li>
-        <li class=""><a href="#signUp" data-toggle="tab">Edit</a></li>
-      </ul>
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-body">
             <div class="modal-body">
-              <form class="form-horizontal">
+              <form>
                 <fieldset>
-                  <legend data-bind="text: dialogTitle"></legend>
+                  <legend>Add task:</legend>
                   <div class="form-group">
                     <div class="controls">
                       <label class="control-label">Title:</label>
@@ -341,29 +334,34 @@
                   <div class="form-group">
                     <div class="controls">
                       <label class="control-label">Description:</label>
-                      <textarea class="form-control autosize"
+                      <textarea class="form-control"
                                 placeholder="Description..."
-                                data-bind="textInput: desc"></textarea>
+                                data-bind="textInput: desc, autosize: desc"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="controls">
                       <label class="control-label">Start Date:</label>
                       <input type="text"
-                             class="form-control input-medium datepicker"
+                             class="form-control input-medium"
                              placeholder="Title"
-                             data-bind="textInput: startDate">
+                             data-bind="datepicker: startDate, datepickerOptions: { autoclose: true, todayhighlight: true }">
                     </div>
                   </div>
                   <div class="form-group">
-                    <div class="controls">
-                      <label class="control-label">Due Date:</label>
-                      <input type="text"
-                             class="form-control input-medium datepicker"
-                             placeholder="Title"
-                             data-bind="textInput: dueDate">
-                    </div>
+                    <input type="text"
+                            class="form-control input-medium"
+                            placeholder="Title"
+                            data-bind="datepicker: dueDate, datepickerOptions: { autoclose: true, todayhighlight: true }">
                   </div>
+                  <div class="form-group">
+                    <label class="control-label">Assigned To:</label>
+                    <span class="label label-success" data-bind="foreach: assignedTo"><span data-bind="text: FullName, click: $parent.removeUser"></span></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Assign User:</label>
+                    <span class="label label-success" data-bind="foreach: availableUsers"><span data-bind="text: FullName, click: $parent.addUser"></span></span>
+                  </div>  
                   <div class="form-group">
                     <div class="controls">
                       <button class="btn btn-success"
@@ -410,10 +408,109 @@
     <!--/OK /Cancel-->
     <!--/Modals-->
   </div>
+  <!--Popovers-->
+  <!--Details/Edit Task-->
   <script type="text/html" id="task-popover">
     <button class="close pull-right" type="button" data-dismiss="popover">×</button>
-    <span data-bind="text: Title"></span>
+    <ul class="nav nav-tabs">
+      <li data-bind="css: {active: isDetails}">
+        <a href="javascript:void(0);" data-bind="click: showDetails">
+          Details
+        </a>
+      </li>
+      <li data-bind="css: {active: isEdit}">
+        <a href="javascript:void(0);" data-bind="click: showEdit">
+          Edit
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane" data-bind="css: { 'active': isDetails }">
+        <div class="well well-sm" data-bind="with: details">
+          <table class="table">
+            <tr>
+              <td>
+                <label>Description:</label>
+                <div data-bind="text: Description"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Assigned to:</label>
+                <label class="label lable-default" data-bind="foreach: AssignedTo"><span data-bind="text: FullName"></span></label>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="tab-pane" data-bind="css: { 'active': isEdit }">
+        <div class="well well-sm">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <input type="text"
+                      class="form-control input-medium"
+                      placeholder="Title"
+                      data-bind="textInput: title">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control autosize"
+                        placeholder="Description..."
+                        data-bind="textInput: desc, autosize: desc"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="text"
+                      class="form-control input-medium"
+                      placeholder="Start Date"
+                      data-bind="datepicker: startDate, datepickerOptions: { autoclose: true, todayhighlight: true }">
+            </div>
+            <div class="form-group">
+              <input type="text"
+                      class="form-control input-medium"
+                      placeholder="Due Date"
+                      data-bind="datepicker: dueDate, datepickerOptions: { autoclose: true, todayhighlight: true }">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Assigned To:</label>
+              <span class="label label-success" data-bind="foreach: assignedTo"><span data-bind="text: FullName, click: $parent.removeUser"></span></span>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Assign User:</label>
+              <span class="label label-success" data-bind="foreach: availableUsers"><span data-bind="text: FullName, click: $parent.addUser"></span></span>
+            </div>  
+            <div class="form-group">
+              <div class="controls">
+                <button class="btn btn-success"
+                        data-bind="enable: enabled, click: save">
+                  <i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </script>
+  <!--/Details/Edit Task-->
+  <!--Ok Cancel-->
+  <script type="text/html" id="ok-cancel-popover">
+    <button class="close pull-right" type="button" data-dismiss="popover">×</button>
+    <span data-bind="text: message"></span>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-4 col-xs-2"></div>
+      <div class="col-lg-6 col-md-6 col-sm-8 col-xs-10">
+        <div class="row">
+          <div class="col-xs-6">
+            <button class="btn btn-success btn-block btn-sm" data-bind="click: confirm, disable: pending"><i class="fa fa-spinner fa-pulse" data-bind="visible: pending"></i>Ok</button>
+          </div>
+          <div class="col-xs-6">
+            <button class="btn btn-default btn-block btn-sm" data-dismiss="popover">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+  <!--/Ok Cancel-->
+  <!--/Popovers-->
 </body>
 
 </html>

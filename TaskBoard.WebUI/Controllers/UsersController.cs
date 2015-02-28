@@ -38,9 +38,9 @@ namespace TaskBoard.WebUI.Controllers
 
         [Route("search")]
         [HttpGet]
-        public IEnumerable<UserModel> Search(string q)
+        public IEnumerable<UserModel> Search(string query)
         {
-            return _userRepository.Find(q);
+            return _userRepository.Find(query);
         }
     }
 }
