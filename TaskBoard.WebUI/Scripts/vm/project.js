@@ -1,10 +1,11 @@
 ﻿window.Project = (function (ko, Column, projectService, userService) {
-  return function (project, selected, remove) {
+  return function (project, selected, remove, updateProject) {
     var self = this;
     self.project = project;
     self.title = ko.observable(project.Title);
     self.desc = ko.observable(project.Description);
     self.columns = ko.observableArray();
+    self.participants = ko.observable(project.Participants);
     self.canEdit = ko.observable(self.project.Owner.Username === userService.user.Username);
     self.getDeleteData = new (function () {
       var $self = this;
@@ -23,6 +24,20 @@
         });
       }
     })();
+    self.edit = function () {
+      projectModal.show(
+        'Edit project', project,
+        function (project, done) {
+          projectService.createProject(project, function (err, res) {
+            if (err) {
+              console.error(err);
+            } else {
+              updateProject(res);
+              done();
+            }
+          });
+        });
+    };
     self.beforeMove = function (args) {
       args.cancelDrop = args.sourceParent.project._id !== args.targetParent.project._id;
     };

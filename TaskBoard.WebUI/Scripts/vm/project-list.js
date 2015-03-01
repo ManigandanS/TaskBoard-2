@@ -7,8 +7,15 @@
     self.removeProject = function(project) {
       self.projects.remove(project);
     };
+    self.updateProject = function (project) {
+      self.selectedProject(new Project(project, self.selectedProject, self.removeProject, self.updateProject))
+      self.projects.replace(
+            ko.utils.arrayFirst(self.projects(), function (entry) { return entry.project._id == project._id; }),
+            self.selectedProject());
+      
+    };
     self.addProject = function (project) {
-      self.projects.push(new Project(project, self.selectedProject, self.removeProject));
+      self.projects.push(new Project(project, self.selectedProject, self.removeProject, self.updateProject));
     };
     self.loadProjects = function (done) {
       projectService.getProjects(function (err, projects) {
@@ -30,12 +37,6 @@
       self.projects.removeAll();
       self.visible(userService.isAuthenticated());
     };
-    self.edit = function (project) {
-
-    };
-    self.isSelected = function (project) {
-
-    };
     self.delete = function (project) {
       okCancelModal.show(
         'Delete project ' + project.project.Title + '?',
@@ -45,6 +46,7 @@
             self.projects.remove(function (entry) {
               entry.project._id === deleteId;
             });
+            self.selectedProject(self.projects()[0]);
             done();
           })
         });

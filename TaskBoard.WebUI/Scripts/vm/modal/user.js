@@ -28,7 +28,7 @@
       Username: self.viewModel.signIn.login(),
       Password: self.viewModel.signIn.password()
     }, function (err, user) {
-      if (err && err.message) {
+      if (err && err.responseJSON) {
         self.viewModel.signIn.loginError();
       } else if (err) {
         console.error(err);

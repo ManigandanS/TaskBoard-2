@@ -22,8 +22,8 @@
 
     self.task.Title = viewModel.title();
     self.task.Description = viewModel.desc();
-    self.task.DueDate = viewModel.dueDate();
-    self.task.StartDate = viewModel.startDate();
+    self.task.DueDate = viewModel.dueDate().toISOString();
+    self.task.StartDate = viewModel.startDate().toISOString();
 
     self.callback(self.task, function () {
       self.viewModel.pending(false);

@@ -3,7 +3,11 @@
 }
 
 .dropzone {
-    min-height: 50px;
+    min-height: 150px;
+}
+
+.task-column {
+    min-height: 300px;
 }
 
 .panel-heading span {
@@ -17,4 +21,8 @@
 
 .white {
     color: #fff;
+}
+
+.user {
+    margin: 2px;
 }
