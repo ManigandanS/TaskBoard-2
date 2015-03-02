@@ -47,3 +47,4 @@
     </li>
   </ul>
 </div>
+<a href="https://github.com/zhakhalov/TaskBoard/tree/master/screenshots">Screenshots</a>
